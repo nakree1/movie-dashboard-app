@@ -6,12 +6,11 @@ const DEFAULT_LANG = 'en-US'
 
 function fetchData(link) {
     const url = `${DOMAIN}/${link}?api_key=${API_KEY}&language=${DEFAULT_LANG}`
-
-
+    return fetch(url)
 }
 
 function makeUrl(link) {
    return `${DOMAIN}/${link}?api_key=${API_KEY}&language=${DEFAULT_LANG}`
 }
 
-export default makeUrl
+export {makeUrl, fetchData}
