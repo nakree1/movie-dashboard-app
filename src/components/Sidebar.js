@@ -5,20 +5,13 @@ class Sidebar extends React.Component {
     render() {
         return (
             <div className="col-2 alert alert-secondary">
-                <ul className="text-white">
-                    <li>
-                        <NavLink to="/">Home</NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/top">Top Rated</NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/favorite">Favorite</NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/film">Test Film</NavLink>
-                    </li>
-                </ul>
+                <div className="btn-group-vertical btn-group-lg">
+                        <NavLink exact to="/" className="btn btn-outline-secondary">Home</NavLink>
+                        <NavLink to="/top" className="btn btn-outline-secondary">Top Rated</NavLink>
+                        <NavLink to="/favorite" className="btn btn-outline-secondary">Favorite</NavLink>
+                        <NavLink to="/film" className="btn btn-outline-secondary">Test Film</NavLink>
+
+                </div>
             </div>
         )
     }

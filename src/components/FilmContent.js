@@ -1,70 +1,62 @@
 import React from 'react'
-import {makeUrl, fetchData} from './../api/fetchData'
+import { connect } from 'react-redux';
+
+import {fetchData} from '../actions/fetchData'
+import axios from 'axios'
 
 class FilmContent extends React.Component {
-    constructor(props) {
-        super(props)
-
-        this.state = {
-            items: {},
-            isLoading: false,
-            errorMessage: ''
-        }
-    }
+        // this.state = {
+        //     items: {},
+        //     isLoading: true,
+        //     errorMessage: 'debugging'
+        // }
 
     componentDidMount() {
-        fetchData('3/movie/32463')
-            .then((data) => {
-                console.log('first .then', data)
-                if (data.status === 200){
-                    return data.json()
-                } else {
-                    throw new Error(`Can\'t Fetch data. Error code is ${data.status}`)
-                }
-            })
-            .then((data) => {
-                console.log(`second .then:`, data)
-                // console.log(data.original_title)
-                this.setState({
-                    items: data
-                })
-            })
-            .catch((error) => {
-                console.log(error.message)
-                console.log(error)
-                console.log('error by console.log')
-                this.setState({
-                    errorMessage: error.message
-                })
-            })
+        console.log('--mounting')
+        this.requestSource = axios.CancelToken.source()
+        this.props.fetchData(('3/movie/32463'), {
+            validateStatus: (status) => {
+                return status === 200; // Reject only if (false) the status code is not equal 200
+            },
+                cancelToken: this.requestSource.token
+        })
 
-        // fetch(makeUrl('3/movie/32463'))
-        //     .then((data) => {
-        //         console.log(data)
-        //         return data.json()
-        //     })
-        //     .then((data) => {
-        //         console.log(data)
-        //         this.setState({
-        //             items: data
-        //         })
-        //     })
+    }
+
+    componentWillUnmount() {
     }
 
     render() {
-        const {items, isLoading, errorMessage} = this.state
-        if (errorMessage.length !== 0) return <div className="alert alert-danger">Error: {errorMessage}</div>
-        else if (isLoading) return <div className="alert alert-info">Data is loading...</div>
+        const {isLoading} = this.props
+        if (isLoading) return (
+            <div className="alert alert-info">Data is loading...</div>
+        )
         else return(
-            <div>
-                <h1>{items.title}</h1>
-                <h3>{items.tagline}</h3>
-                <div className="text-muted">{items.release_date}</div>
-                <p>{items.overview}</p>
-                <p>{items.id}</p>
+            <div className="container">
+                isLoading = false
             </div>
         )
     }
 }
+//read states
+// const mapStateToProps = (state) => {
+//     return {
+//         items: state.items,
+//         hasErrored: state.itemsHasErrored,
+//         errorMessage: state.itemsErrorMessage,
+//         isLoading: state.itemsIsLoading
+//     };
+// };
 
-export default FilmContent
+const mapStateToProps = (state) => {
+    return {isLoading: state.itemsIsLoading}
+};
+
+//make action
+const mapDispatchToProps = (dispatch) => {
+    return {
+        fetchData: (url) => dispatch(fetchData(url))
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(FilmContent)

@@ -30,7 +30,14 @@
   },
   "description": "Discover new films",
   "main": "index.js",
-  "dependencies": {},
+  "dependencies": {
+    "axios": "^0.18.0",
+    "font-awesome": "^4.7.0",
+    "react-redux": "^5.0.7",
+    "react-router-redux": "^4.0.8",
+    "redux": "^4.0.0",
+    "redux-thunk": "^2.3.0"
+  },
   "repository": {
     "type": "git",
     "url": "\u0016https://github.com/nakree1/movie-dashboard-app.git"

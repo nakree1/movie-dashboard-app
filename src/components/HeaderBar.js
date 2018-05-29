@@ -10,6 +10,7 @@ class HeaderBar extends React.Component {
                         <Switch>
                             <Route exact path="/" render={() => ('Home')}/>
                             <Route exact path="/film" render={() => ('Film header')}/>
+                            <Route exact path="/top" render={() => ('Top Rated Films')}/>
                             <Route exact path="/sidebar" render={() => ('Sidebar Header')}/>
                             <Route render={() => ('Page 404')}/>
                         </Switch>
