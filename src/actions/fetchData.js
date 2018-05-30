@@ -1,12 +1,24 @@
 import axios from 'axios';
+import { filmDataFetch, filmDataError, filmDataLoading } from './actions'
 
 const API_KEY = 'b5f0098853db702baae85840063564e6'
 const DOMAIN = 'https://api.themoviedb.org'
 const DEFAULT_LANG = 'en-US'
 
 function fetchData(link, options) {
-    return
-        (dispatch) => {dispatch(itemsIsLoading(true))}
+    const url = `${DOMAIN}/${link}?api_key=${API_KEY}&language=${DEFAULT_LANG}`
+    return (dispatch) => {
+        axios.get(url, options)
+                    .then((response) => {
+                        console.log(response.data)
+                        dispatch(filmDataFetch(response.data))
+                        dispatch(filmDataLoading(false))
+                    })
+                    .catch((error) => {
+                        console.log(error.message)
+                        dispatch(filmDataError(error.message))
+                    })
+    }
 }
 
 // function fetchData(link, options) {
