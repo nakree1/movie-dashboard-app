@@ -1,5 +1,5 @@
 import React from 'react'
-import {makeUrl, fetchData} from '../actions/fetchData'
+import {makeUrl, fetchDataFilm} from '../actions/fetchData'
 import axios from 'axios'
 
 class FilmContent extends React.Component {
@@ -19,7 +19,7 @@ class FilmContent extends React.Component {
         console.log('--mounting')
         this.requestSource = axios.CancelToken.source()
         console.log(this.requestSource)
-        fetchData(('3/movie/32463'), {
+        fetchDataFilm(('3/movie/32463'), {
             validateStatus: (status) => {
                 return status === 200; // Reject only if (false) the status code is not equal 200
             },

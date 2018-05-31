@@ -1,18 +1,14 @@
 import {
     FILM_DATA_ERROR,
     FILM_DATA_FETCH,
-    FILM_DATA_IS_LOADING
+    FILM_DATA_IS_LOADING,
+    CONFIG_DATA_FETCH_LANG,
+    CONFIG_DATA_FETCH_IMAGES,
+    TOP_FILM_DATA_FETCH,
+    TOP_FILM_DATA_IS_LOADING,
+    TOP_FILM_DATA_ERROR
 } from '../constants/constants'
 
-export function itemsIsLoadingReducer(state = false, action) {
-    switch (action.type) {
-        case 'ITEMS_IS_LOADING':
-            return action.isLoading;
-
-        default:
-            return state;
-    }
-}
 
 export function filmDataReducer(state, action) {
     if (!state) state = {
@@ -44,33 +40,58 @@ export function filmDataReducer(state, action) {
     }
 }
 
+export function topFilmDataReducer(state, action) {
+    if (!state) state = {
+        isLoading: false,
+        errorMessage: '',
+        data: {}
+    }
+
+    switch (action.type) {
+        case TOP_FILM_DATA_FETCH:
+            return {
+                ...state,
+                data: action.data
+            };
+
+        case TOP_FILM_DATA_IS_LOADING:
+            return {
+                ...state,
+                isLoading: action.isLoading
+            };
+
+        case TOP_FILM_DATA_ERROR:
+            return {
+                ...state,
+                errorMessage: action.errorMessage
+            };
+
+        default:
+            return state;
+    }
+}
+
+export function configApiReducer(state, action) {
+    if (!state) state = {
+        images: {},
+        lang: []
+    }
+    switch (action.type) {
+        case CONFIG_DATA_FETCH_IMAGES:
+            return {
+                ...state,
+                images: action.data
+            }
+
+        case CONFIG_DATA_FETCH_LANG:
+            return {
+                ...state,
+                lang: action.data
+            }
+
+        default:
+            return state;
+    }
+}
 
 
-// export function itemsHasErroredReducer(state = false, action) {
-//     switch (action.type) {
-//         case 'ITEMS_HAS_ERRORED':
-//             return action.hasErrored;
-//
-//         default:
-//             return state;
-//     }
-// }
-// export function itemsErrorMessageReducer(state = '', action) {
-//     switch (action.type) {
-//         case 'ITEMS_ERROR_MESSAGE':
-//             return action.errorMessage
-//
-//         default:
-//             return state;
-//     }
-// }
-//
-// export function itemsReducer(state = [], action) {
-//     switch (action.type) {
-//         case 'ITEMS_FETCH_DATA_SUCCESS':
-//             return action.items;
-//
-//         default:
-//             return state;
-//     }
-// }

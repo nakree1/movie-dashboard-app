@@ -1,3 +1,15 @@
+export const API_KEY = 'b5f0098853db702baae85840063564e6'
+export const DOMAIN = 'https://api.themoviedb.org'
+export const DEFAULT_LANG = 'en-US'
+
 export const FILM_DATA_FETCH = 'FILM_DATA_FETCH';
 export const FILM_DATA_IS_LOADING = 'FILM_DATA_IS_LOADING';
 export const FILM_DATA_ERROR = 'FILM_DATA_ERROR';
+
+export const TOP_FILM_DATA_FETCH = 'TOP_FILM_DATA_FETCH';
+export const TOP_FILM_DATA_IS_LOADING = 'TOP_FILM_DATA_IS_LOADING';
+export const TOP_FILM_DATA_ERROR = 'TOP_FILM_DATA_ERROR';
+
+
+export const CONFIG_DATA_FETCH_IMAGES = 'CONFIG_DATA_FETCH_IMAGES';
+export const CONFIG_DATA_FETCH_LANG = 'CONFIG_DATA_FETCH_LANG';

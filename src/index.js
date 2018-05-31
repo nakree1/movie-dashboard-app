@@ -5,10 +5,13 @@ import {Provider} from 'react-redux'
 import configureStore from './store/configureStore'
 import {syncHistoryWithStore} from 'react-router-redux'
 
-import {itemsIsLoading, filmDataFetch, filmDataError, filmDataLoading} from './actions/actions.js'
+import {configDataFetch, filmDataFetch, filmDataError, filmDataLoading} from './actions/actions.js'
+import {fetchConfigApi} from "./actions/fetchData"
+
 
 import App from './components/App'
 import 'bootstrap/scss/bootstrap.scss'
+
 
 const store = configureStore(
 
@@ -16,17 +19,14 @@ const store = configureStore(
 
 // const history = syncHistoryWithStore(browserHistory, store)
 // Router history={history}>
-console.log(store.getState())
-store.dispatch(filmDataFetch({id:'First data'}))
-console.log(store.getState())
-store.dispatch(filmDataFetch({id:'Second data'}))
 store.dispatch(filmDataLoading(true))
+store.dispatch(fetchConfigApi())
 console.log(store.getState())
 
 render((
     <Provider store={store}>
         <Router>
-            <App />
+            <App/>
         </Router>
     </Provider>
 ), document.getElementById('root'));

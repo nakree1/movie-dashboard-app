@@ -1,16 +1,12 @@
 import {
     FILM_DATA_ERROR,
     FILM_DATA_FETCH,
-    FILM_DATA_IS_LOADING
+    FILM_DATA_IS_LOADING,
+    CONFIG_DATA_FETCH_IMAGES,
+    CONFIG_DATA_FETCH_LANG, TOP_FILM_DATA_FETCH, TOP_FILM_DATA_ERROR, TOP_FILM_DATA_IS_LOADING
 } from '../constants/constants'
 
-
-export function itemsIsLoading(bool) {
-    return {
-        type: ITEMS_IS_LOADING,
-        isLoading: bool
-    };
-}
+//Film Content
 
 export function filmDataFetch(data) {
     return {
@@ -33,23 +29,41 @@ export function filmDataLoading(bool) {
     };
 }
 
-// export function itemsFetchDataSuccess(items) {
-//     return {
-//         type: 'ITEMS_FETCH_DATA_SUCCESS',
-//         items
-//     };
-// }
-//
-// export function itemsHasErrored(bool) {
-//     return {
-//         type: 'ITEMS_HAS_ERRORED',
-//         hasErrored: bool
-//     };
-// }
-//
-// export function itemsErrorMessage(str) {
-//     return {
-//         type: 'ITEMS_ERROR_MESSAGE',
-//         errorMessage: str
-//     };
-// }
+//Top Content
+
+export function topFilmDataFetch(data) {
+    return {
+        type: TOP_FILM_DATA_FETCH,
+        data: data
+    };
+}
+
+export function topFilmDataLoading(bool) {
+    return {
+        type: TOP_FILM_DATA_IS_LOADING,
+        isLoading: bool
+    };
+}
+
+export function topFilmDataError(error) {
+    return {
+        type: TOP_FILM_DATA_ERROR,
+        errorMessage: error
+    };
+}
+
+//App Init
+
+export function configDataFetchImages(data) {
+    return {
+        type: CONFIG_DATA_FETCH_IMAGES,
+        data: data
+    };
+}
+
+export function configDataFetchLang(data) {
+    return {
+        type: CONFIG_DATA_FETCH_LANG,
+        data: data
+    };
+}

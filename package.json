@@ -1,6 +1,6 @@
 {
   "name": "movie-dasboard",
-  "version": "0.0.1",
+  "version": "0.3.0",
   "scripts": {
     "dev": "webpack-dev-server --mode development --open",
     "build": "webpack --mode production"

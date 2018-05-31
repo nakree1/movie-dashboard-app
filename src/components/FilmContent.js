@@ -1,22 +1,19 @@
 import React from 'react'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
+import {connect} from 'react-redux'
 
-import {fetchData} from '../actions/fetchData'
+import {fetchConfigApi, fetchDataFilm} from '../actions/fetchData'
+import getImageLink from '../actions/getImageLink'
 import axios from 'axios'
 
 class FilmContent extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props)
-
     }
 
     componentDidMount() {
         console.log('--mounting film container')
         this.requestSource = axios.CancelToken.source()
-        console.log(this.requestSource)
-        console.log(this.requestSource.token)
-        this.props.fetchData(('3/movie/32463'), {
+        this.props.fetchData(('3/movie/299536'), {
             validateStatus: (status) => {
                 return status === 200; // Reject only if (false) the status code is not equal 200
             },
@@ -37,52 +34,50 @@ class FilmContent extends React.Component {
     }
 
     render() {
-        console.log(this.requestSource)
         const {data, isLoading, errorMessage} = this.props
         const myButton = <button onClick={this.handleClick}>Cancel</button>
 
         if (errorMessage.length !== 0) return <div className="alert alert-danger">Error: {errorMessage}</div>
         else if (isLoading) return <div className="alert alert-info">Data is loading...{myButton}</div>
-        else return(
-                <div className="container">
-                    <h1>{data.title}</h1>
-                    <h3>{data.tagline}</h3>
-                    <div className="text-muted">{data.release_date}</div>
-                    <p>{data.overview}</p>
-                    <p>{data.id}</p>
+        else return (
+                <div className="container-fluid my-4">
+                    <div className="row">
+                        <div className="col-4">
+                            <img
+                                src={getImageLink(this.props.configApi,this.props.data.poster_path, 'poster', 'w342')}
+                                className="img-fluid"
+                            />
+                        </div>
+                        <div className="col">
+                            <h1>{data.title}</h1>
+                            <h3>{data.tagline}</h3>
+                            <div className="text-muted">{data.release_date}</div>
+                            <p>{data.overview}</p>
+                            <p>Film ID: {data.id}</p>
+                        </div>
+                    </div>
                 </div>
-        )
+            )
     }
 }
-//read states
-// const mapStateToProps = (state) => {
-//     return {
-//         items: state.items,
-//         hasErrored: state.itemsHasErrored,
-//         errorMessage: state.itemsErrorMessage,
-//         isLoading: state.itemsIsLoading
-//     };
-// };
+
+
 //получаем стейты в виде пропсов отсюда с редакса
 const mapStateToProps = (state) => {
     return {
         isLoading: state.cachedFilm.isLoading,
         errorMessage: state.cachedFilm.errorMessage,
-        data: state.cachedFilm.data
+        data: state.cachedFilm.data,
+        configApi: state.configApi
     }
 };
 
-// make action
+// get callback func from props
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchData: (bool) => dispatch(fetchData(bool))
+        fetchData: (url) => dispatch(fetchDataFilm(url))
     };
 };
-//
-// const mapDispatchToProps = (dispatch) => {
-//     return {
-//         fetchData: (url) => dispatch(fetchData(url))
-//     };
-// };
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(FilmContent)
