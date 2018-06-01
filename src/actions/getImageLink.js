@@ -1,9 +1,6 @@
 export default function getImageLink(configApi,file_path, type, size = 'original') {
     // console.log(`getImageLink arguments: ${configApi},${file_path},${type}, ${size}`)
-    if (!(file_path || configApi.images || type)) {
-        // console.log('first if')
-        return null
-    }
+    if (!(file_path || configApi.images || type)) return null
 
     const {base_url, poster_sizes, backdrop_sizes} = configApi.images
     let arr;
@@ -18,9 +15,7 @@ export default function getImageLink(configApi,file_path, type, size = 'original
             break
     }
 
-    if (arr && !arr.includes(size)) {
-        // console.log('second if')
-        return null
-    }
+    if (arr && !arr.includes(size)) return null
+
     return `${base_url}/${size}${file_path}`
 }

@@ -1,6 +1,11 @@
 import axios from 'axios';
 import {
-    configDataFetchImages, filmDataError, filmDataFetch, filmDataLoading, topFilmDataError, topFilmDataFetch,
+    configDataFetchImages,
+    filmDataError,
+    filmDataFetch,
+    filmDataLoading,
+    topFilmDataError,
+    topFilmDataFetch,
     topFilmDataLoading
 } from './actions'
 import {API_KEY, DEFAULT_LANG, DOMAIN} from "../constants/constants"
@@ -23,7 +28,7 @@ function fetchDataFilm(link, options) {
 }
 
 function fetchDataTop(page = 1, options) {
-    const link ='3/movie/top_rated'
+    const link = '3/movie/top_rated'
     const url = `${DOMAIN}/${link}?api_key=${API_KEY}&language=${DEFAULT_LANG}&page=${page}`
     return (dispatch) => {
         axios.get(url, options)
@@ -39,7 +44,7 @@ function fetchDataTop(page = 1, options) {
     }
 }
 
-function fetchConfigApi(options){
+function fetchConfigApi(options) {
     const url = `${DOMAIN}/3/configuration?api_key=${API_KEY}`
     return (dispatch) => {
         axios.get(url, options)

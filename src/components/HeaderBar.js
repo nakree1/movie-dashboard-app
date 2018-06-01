@@ -1,5 +1,5 @@
 import React from 'react'
-import {Switch, Route} from 'react-router-dom'
+import {Route, Switch} from 'react-router-dom'
 
 class HeaderBar extends React.Component {
     render() {
@@ -9,9 +9,8 @@ class HeaderBar extends React.Component {
                     <div className="h1 text-center text-white">
                         <Switch>
                             <Route exact path="/" render={() => ('Home')}/>
-                            <Route exact path="/film" render={() => ('Film header')}/>
-                            <Route exact path="/top" render={() => ('Top Rated Films')}/>
-                            <Route exact path="/sidebar" render={() => ('Sidebar Header')}/>
+                            <Route path="/film" render={() => ('Film header')}/>
+                            <Route path="/top" render={() => ('Top Rated Films')}/>
                             <Route render={() => ('Page 404')}/>
                         </Switch>
                     </div>

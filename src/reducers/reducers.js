@@ -12,7 +12,7 @@ import {
 
 export function filmDataReducer(state, action) {
     if (!state) state = {
-        isLoading: false,
+        isLoading: true,
         errorMessage: '',
         data: {}
     }
@@ -42,7 +42,7 @@ export function filmDataReducer(state, action) {
 
 export function topFilmDataReducer(state, action) {
     if (!state) state = {
-        isLoading: false,
+        isLoading: true,
         errorMessage: '',
         data: {}
     }

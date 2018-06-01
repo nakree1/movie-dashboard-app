@@ -1,5 +1,5 @@
 import React from 'react'
-import {NavLink} from 'react-router-dom'
+import {NavLink, Redirect} from 'react-router-dom'
 
 class Sidebar extends React.Component {
     render() {
@@ -10,6 +10,8 @@ class Sidebar extends React.Component {
                         <NavLink to="/top" className="btn btn-outline-secondary">Top Rated</NavLink>
                         <NavLink to="/favorite" className="btn btn-outline-secondary">Favorite</NavLink>
                         <NavLink to="/film" className="btn btn-outline-secondary">Test Film</NavLink>
+
+
 
                 </div>
             </div>

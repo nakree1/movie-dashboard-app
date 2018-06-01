@@ -1,7 +1,9 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
 
-import {fetchConfigApi, fetchDataFilm} from '../actions/fetchData'
+import {fetchDataFilm} from '../actions/fetchData'
+import {filmDataLoading} from "../actions/actions"
 import getImageLink from '../actions/getImageLink'
 import axios from 'axios'
 
@@ -11,9 +13,11 @@ class FilmContent extends React.Component {
     }
 
     componentDidMount() {
+        console.log(this.props)
         console.log('--mounting film container')
+        console.log(`3/movie/${this.props.match.params.id}`)
         this.requestSource = axios.CancelToken.source()
-        this.props.fetchData(('3/movie/299536'), {
+        this.props.fetchData((`3/movie/${this.props.match.params.id}`), {
             validateStatus: (status) => {
                 return status === 200; // Reject only if (false) the status code is not equal 200
             },
@@ -24,7 +28,7 @@ class FilmContent extends React.Component {
 
     componentWillUnmount() {
         console.log('--unmount film container')
-        this.requestSource.cancel('cancel request by user')
+        this.props.setIsLoading(true)
     }
 
     handleClick = (e) => {
@@ -44,7 +48,7 @@ class FilmContent extends React.Component {
                     <div className="row">
                         <div className="col-4">
                             <img
-                                src={getImageLink(this.props.configApi,this.props.data.poster_path, 'poster', 'w342')}
+                                src={getImageLink(this.props.configApi, this.props.data.poster_path, 'poster', 'w342')}
                                 className="img-fluid"
                             />
                         </div>
@@ -54,6 +58,7 @@ class FilmContent extends React.Component {
                             <div className="text-muted">{data.release_date}</div>
                             <p>{data.overview}</p>
                             <p>Film ID: {data.id}</p>
+                            <Link to={`/top/${this.props.prevUrl}`} className="h2 text-success"> {'<-'} Back </Link>
                         </div>
                     </div>
                 </div>
@@ -68,14 +73,16 @@ const mapStateToProps = (state) => {
         isLoading: state.cachedFilm.isLoading,
         errorMessage: state.cachedFilm.errorMessage,
         data: state.cachedFilm.data,
-        configApi: state.configApi
+        configApi: state.configApi,
+        prevUrl: state.cachedTop.data.page
     }
 };
 
 // get callback func from props
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchData: (url) => dispatch(fetchDataFilm(url))
+        fetchData: (url) => dispatch(fetchDataFilm(url)),
+        setIsLoading: (bool) => dispatch(filmDataLoading(bool))
     };
 };
 

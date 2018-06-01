@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { PropTypes} from 'react'
 import {fetchDataTop} from '../actions/fetchData'
 import {connect} from 'react-redux'
+import {Link, Redirect, withRouter, browserHistory} from 'react-router-dom'
+import {history} from 'react-router'
 import getImageLink from '../actions/getImageLink'
 import axios from 'axios'
 
@@ -8,55 +10,57 @@ class TopContent extends React.Component {
     constructor(props) {
         super(props)
 
-        this.state = {
-            currentPage: 1
-        }
-
     }
 
     componentDidMount() {
         console.log('--mounting TopContent')
-        this.requestSource = axios.CancelToken.source()
-        this.props.fetchData(1, {
+        console.log(this.props)
+
+        this.props.fetchData((this.props.match.params.page ? this.props.match.params.page : "1"), {
             validateStatus: (status) => {
                 return status === 200; // Reject only if (false) the status code is not equal 200
-            },
-            cancelToken: this.requestSource.token
+            }
         })
     }
 
-    componentWillUpdate() {
+    componentWillUpdate(nextProps, nextState) {
+        if (nextProps.match.params.page === this.props.match.params.page) return
 
+        this.props.fetchData((nextProps.match.params.page ? nextProps.match.params.page : "1"), {
+            validateStatus: (status) => {
+                return status === 200; // Reject only if (false) the status code is not equal 200
+            }
+        })
     }
 
     componentWillUnmount() {
-        this.requestSource.cancel('cancel request by user')
+
         console.log('--unmount TopContent')
     }
 
     handleClick = (e) => {
+        const page = this.props.match.params.page
+        const totalPages = this.props.totalPages
         switch (e.target.name) {
             case 'return':
-                this.state.currentPage = 1
+                // this.state.currentPage = 1
+                this.props.history.push(`/top/1`)
                 break;
 
             case 'next':
-                (this.props.totalPages == (this.state.currentPage + 1)) ? null : this.state.currentPage = this.state.currentPage + 1
+                if (page >= totalPages) return// (this.props.totalPages == (this.state.currentPage + 1)) ? null : this.state.currentPage = this.state.currentPage + 1
+                this.props.history.push(`/top/${ +page + 1}`)
+
+                // browserHistory.push(`/top/${ +this.props.match.params.page + 1}`)
                 break;
 
             case 'prev':
-                (0 === (this.state.currentPage - 1)) ? null : this.state.currentPage = this.state.currentPage - 1
+                if (page <= 1) return
+                this.props.history.push(`/top/${ +this.props.match.params.page - 1}`)
                 break;
         }
-
-        this.props.fetchData(this.state.currentPage, {
-            validateStatus: (status) => {
-                return status === 200; // Reject only if (false) the status code is not equal 200
-            },
-            cancelToken: this.requestSource.token
-        })
-
     }
+
 
     render() {
         console.log('TOP props:')
@@ -65,12 +69,22 @@ class TopContent extends React.Component {
         console.log(this.state)
 
         const {data, isLoading, errorMessage} = this.props
+
         const buttonGroup =
             <div className="btn-group btn-group ">
-               <button className="btn btn-outline-secondary" name="return" onClick={this.handleClick}>Return to page 1</button>
-               <button className="btn btn-outline-secondary" name="prev" onClick={this.handleClick}>Prev</button>
-               <button className="btn btn-outline-secondary" name="next" onClick={this.handleClick}>Next</button>
+                <button className="btn btn-outline-secondary" name="return" onClick={this.handleClick}>
+                    First Page
+                </button>
+                <button className="btn btn-outline-secondary" name="prev" onClick={this.handleClick}>
+                    Prev
+                </button>
+                <button className="btn btn-outline-secondary" name="next" onClick={this.handleClick}>
+                    Next
+                </button>
             </div>
+
+
+
 
         const list = data ? data.map((item) => {
             return (
@@ -81,7 +95,9 @@ class TopContent extends React.Component {
                     />
                     <div className="card-body">
                         <p className="card-text">
-                            {item.title}
+                            <Link to={`/film/${item.id}`} >
+                                {item.title}
+                            </Link>
                         </p>
                     </div>
                 </div>
@@ -95,13 +111,13 @@ class TopContent extends React.Component {
         else return(
                 <div className="container-fluid">
                     <div className="row justify-content-center my-2">
-                        <div className="alert alert-info">Page: {this.state.currentPage} Total: {this.props.totalPages}</div>
+                        <div className="alert alert-info">Page: {this.props.match.params.page} Total: {this.props.totalPages}</div>
                     </div>
                     <div className="row d-flex justify-content-center mb-5">
                         {buttonGroup}
                     </div>
                     <div className="row">
-                        <div className="col d-flex flex-wrap justify-content-between">
+                        <div className="col d-flex flex-wrap justify-content-between" onClick={this.handleItemClick}>
                             {list}
                         </div>
                     </div>
@@ -129,4 +145,5 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 
+withRouter(TopContent)
 export default connect(mapStateToProps, mapDispatchToProps)(TopContent)
