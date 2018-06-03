@@ -16,7 +16,6 @@ function fetchDataFilm(link, options) {
     return (dispatch) => {
         axios.get(url, options)
             .then((response) => {
-                // console.log(response.data)
                 dispatch(filmDataFetch(response.data))
                 dispatch(filmDataLoading(false))
             })
