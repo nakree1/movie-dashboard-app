@@ -11,6 +11,7 @@ import {fetchConfigApi} from "./actions/fetchData"
 
 import App from './components/App'
 import 'bootstrap/scss/bootstrap.scss'
+import {filmDataRemove, filmDataSave} from "./actions/actions";
 
 
 const store = configureStore(
@@ -21,6 +22,10 @@ const store = configureStore(
 // Router history={history}>
 store.dispatch(filmDataLoading(true))
 store.dispatch(fetchConfigApi())
+store.dispatch(filmDataSave({id:123,title:"blah blah"}))
+store.dispatch(filmDataSave({id:323,title:"blah11 blah"}))
+store.dispatch(filmDataSave({id:423,title:"blah222 blah"}))
+store.dispatch(filmDataRemove(323))
 console.log(store.getState())
 
 render((

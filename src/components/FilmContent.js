@@ -3,9 +3,10 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 
 import {fetchDataFilm} from '../actions/fetchData'
-import {filmDataLoading} from "../actions/actions"
+import {filmDataLoading, filmDataSave} from "../actions/actions"
 import getImageLink from '../actions/getImageLink'
 import axios from 'axios'
+import saveFilm from "../actions/saveFilm";
 
 class FilmContent extends React.Component {
     constructor(props) {
@@ -37,6 +38,11 @@ class FilmContent extends React.Component {
         this.requestSource.cancel
     }
 
+    saveFilm = () => {
+        console.log(this.props.data)
+        this.props.saveFilm(this.props.data)
+    }
+
     render() {
         const {data, isLoading, errorMessage} = this.props
         const myButton = <button onClick={this.handleClick}>Cancel</button>
@@ -58,6 +64,8 @@ class FilmContent extends React.Component {
                             <div className="text-muted">{data.release_date}</div>
                             <p>{data.overview}</p>
                             <p>Film ID: {data.id}</p>
+                            <button className="btn btn-outline-success" onClick={this.saveFilm}>Save</button>
+                            <br />
                             <Link to={`/top/${this.props.prevUrl}`} className="h2 text-success"> {'<-'} Back </Link>
                         </div>
                     </div>
@@ -82,9 +90,11 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchData: (url) => dispatch(fetchDataFilm(url)),
-        setIsLoading: (bool) => dispatch(filmDataLoading(bool))
+        setIsLoading: (bool) => dispatch(filmDataLoading(bool)),
+        saveFilm: (data) => dispatch(saveFilm(data))
     };
 };
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(FilmContent)
+

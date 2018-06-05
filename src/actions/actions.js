@@ -4,6 +4,8 @@ import {
     FILM_DATA_ERROR,
     FILM_DATA_FETCH,
     FILM_DATA_IS_LOADING,
+    FILM_DATA_SAVE,
+    FILM_DATA_REMOVE,
     TOP_FILM_DATA_ERROR,
     TOP_FILM_DATA_FETCH,
     TOP_FILM_DATA_IS_LOADING
@@ -15,6 +17,20 @@ export function filmDataFetch(data) {
     return {
         type: FILM_DATA_FETCH,
         data: data
+    };
+}
+
+export function filmDataSave(data) {
+    return {
+        type: FILM_DATA_SAVE,
+        data: data
+    };
+}
+
+export function filmDataRemove(id) {
+    return {
+        type: FILM_DATA_REMOVE,
+        id: id
     };
 }
 

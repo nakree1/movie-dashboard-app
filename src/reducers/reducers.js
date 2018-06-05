@@ -6,9 +6,25 @@ import {
     CONFIG_DATA_FETCH_IMAGES,
     TOP_FILM_DATA_FETCH,
     TOP_FILM_DATA_IS_LOADING,
-    TOP_FILM_DATA_ERROR
+    TOP_FILM_DATA_ERROR, FILM_DATA_SAVE, FILM_DATA_REMOVE
 } from '../constants/constants'
 
+
+export function savedDataReducer(state = [], action) {
+    switch (action.type) {
+        case FILM_DATA_SAVE:
+            return [...state, action.data]
+
+        case FILM_DATA_REMOVE:
+            return state.filter((item) => {return item.id !== action.id})
+
+
+        default:
+            return state;
+    }
+
+
+}
 
 export function filmDataReducer(state, action) {
     if (!state) state = {
