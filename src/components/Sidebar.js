@@ -8,11 +8,8 @@ class Sidebar extends React.Component {
                 <div className="btn-group-vertical btn-group-lg w-100">
                         <NavLink exact to="/" className="btn btn-outline-secondary">Home</NavLink>
                         <NavLink to="/top" className="btn btn-outline-secondary">Top Rated</NavLink>
-                        <NavLink to="/favorite" className="btn btn-outline-secondary">Favorite</NavLink>
-                        <NavLink to="/film" className="btn btn-outline-secondary">Test Film</NavLink>
-
-
-
+                        <NavLink to="/saved" className="btn btn-outline-secondary">Saved</NavLink>
+                        <NavLink to="/wrongroute" className="btn btn-outline-secondary">Wrong Route</NavLink>
                 </div>
             </div>
         )

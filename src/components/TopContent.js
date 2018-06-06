@@ -58,14 +58,14 @@ class TopContent extends React.Component {
         )
         else return(
                 <div className="container-fluid">
-                    <div className="row justify-content-center my-2">
+                    <div className="row justify-content-center">
                         <div className="alert alert-info">Page: {this.props.page} Total: {this.props.totalPages}</div>
                     </div>
                     <div className="row d-flex justify-content-center mb-5">
                         {buttonGroup}
                     </div>
                     <div className="row">
-                        <div className="col d-flex flex-wrap justify-content-between">
+                        <div className="col d-flex flex-wrap">
                             {list}
                         </div>
                     </div>

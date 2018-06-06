@@ -10,6 +10,7 @@ import {fetchConfigApi} from "./actions/fetchData"
 
 
 import App from './components/App'
+import './index.scss'
 import 'bootstrap/scss/bootstrap.scss'
 import {filmDataRemove, filmDataSave} from "./actions/actions";
 
@@ -22,10 +23,21 @@ const store = configureStore(
 // Router history={history}>
 store.dispatch(filmDataLoading(true))
 store.dispatch(fetchConfigApi())
-store.dispatch(filmDataSave({id:123,title:"blah blah"}))
-store.dispatch(filmDataSave({id:323,title:"blah11 blah"}))
-store.dispatch(filmDataSave({id:423,title:"blah222 blah"}))
-store.dispatch(filmDataRemove(323))
+store.dispatch(filmDataSave({
+    id:424,
+    title:"Schindler's List",
+    imageLink:"http://image.tmdb.org/t/p//w342/yPisjyLweCl1tbgwgtzBCNCBle.jpg"
+}))
+store.dispatch(filmDataSave({
+    id:299536,
+    title:"Avengers: Infinity War",
+    imageLink:"http://image.tmdb.org/t/p//w342/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg"
+}))
+store.dispatch(filmDataSave({
+    id:155,
+    title:"The Dark Knight",
+    imageLink:"http://image.tmdb.org/t/p//w342/1hRoyzDtpgMU7Dz4JF22RANzQO7.jpg"
+}))
 console.log(store.getState())
 
 render((

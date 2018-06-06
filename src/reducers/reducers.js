@@ -13,6 +13,7 @@ import {
 export function savedDataReducer(state = [], action) {
     switch (action.type) {
         case FILM_DATA_SAVE:
+            if (state.find((item) => (item.id === action.data.id)) !== undefined) return state
             return [...state, action.data]
 
         case FILM_DATA_REMOVE:

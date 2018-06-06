@@ -14,6 +14,7 @@ import {API_KEY, DEFAULT_LANG, DOMAIN} from "../constants/constants"
 function fetchDataFilm(link, options) {
     const url = `${DOMAIN}/${link}?api_key=${API_KEY}&language=${DEFAULT_LANG}`
     return (dispatch) => {
+        dispatch(filmDataLoading(true))
         axios.get(url, options)
             .then((response) => {
                 dispatch(filmDataFetch(response.data))
@@ -22,6 +23,8 @@ function fetchDataFilm(link, options) {
             .catch((error) => {
                 console.log(error.message)
                 dispatch(filmDataError(error.message))
+                dispatch(filmDataLoading(false))
+                setTimeout((link, options) => fetchDataFilm(link, options), 1000)
             })
     }
 }
@@ -30,6 +33,7 @@ function fetchDataTop(page = 1, options) {
     const link = '3/movie/top_rated'
     const url = `${DOMAIN}/${link}?api_key=${API_KEY}&language=${DEFAULT_LANG}&page=${page}`
     return (dispatch) => {
+        // dispatch(topFilmDataLoading(true))
         axios.get(url, options)
             .then((response) => {
                 console.log(response.data)
@@ -39,6 +43,7 @@ function fetchDataTop(page = 1, options) {
             .catch((error) => {
                 console.log(error.message)
                 dispatch(topFilmDataError(error.message))
+                dispatch(topFilmDataLoading(false))
             })
     }
 }

@@ -5,16 +5,15 @@ class HeaderBar extends React.Component {
     render() {
         return (
             <header className="row bg-success">
-                <h2 className="col">
-                    <div className="h1 text-center text-white">
+                    <div className="h1 text-center text-white py-2 mx-auto">
                         <Switch>
                             <Route exact path="/" render={() => ('Home')}/>
-                            <Route path="/film" render={() => ('Film header')}/>
+                            <Route path="/film" render={() => ('Film Header')}/>
                             <Route path="/top" render={() => ('Top Rated Films')}/>
+                            <Route path="/saved" render={() => ('Saved Films')}/>
                             <Route render={() => ('Page 404')}/>
                         </Switch>
                     </div>
-                </h2>
             </header>
         )
     }
