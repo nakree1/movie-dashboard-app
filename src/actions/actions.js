@@ -8,7 +8,7 @@ import {
     FILM_DATA_REMOVE,
     TOP_FILM_DATA_ERROR,
     TOP_FILM_DATA_FETCH,
-    TOP_FILM_DATA_IS_LOADING
+    TOP_FILM_DATA_IS_LOADING, SEARCH_DATA_FETCH, SEARCH_DATA_REQUEST
 } from '../constants/constants'
 
 //Film Content
@@ -71,12 +71,22 @@ export function topFilmDataError(error) {
     };
 }
 
-// export function topFilmDataPage(page) {
-//     return {
-//         type: TOP_FILM_DATA_ERROR,
-//         page: page
-//     };
-// }
+//Search
+
+export function searchData(data) {
+    return {
+        type: SEARCH_DATA_FETCH,
+        data: data
+    };
+}
+
+export function searchRequest(request) {
+    return {
+        type: SEARCH_DATA_REQUEST,
+        request: request
+    };
+}
+
 
 //App Init
 

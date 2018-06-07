@@ -1,5 +1,6 @@
 import React from 'react'
 import {Route, Switch} from 'react-router-dom'
+import SearchInput from './SearchInput'
 import './HeaderBar.scss'
 
 class HeaderBar extends React.Component {
@@ -15,10 +16,7 @@ class HeaderBar extends React.Component {
                         <Route render={() => ('Page 404')}/>
                     </Switch>
                 </div>
-
-                <input type="text" className="form-control-dark form-control w-100" placeholder="Search"/>
-                <button className="btn btn-secondary btn-square bg-dark h-100">Submit</button>
-
+                <SearchInput/>
             </nav>
         )
     }

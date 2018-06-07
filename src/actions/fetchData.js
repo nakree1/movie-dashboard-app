@@ -10,6 +10,23 @@ import {
 } from './actions'
 import {API_KEY, DEFAULT_LANG, DOMAIN} from "../constants/constants"
 
+function fetchSearch(query, page = 1, options) {
+    const link = '3/search/multi'
+    const url = `${DOMAIN}/${link}?api_key=${API_KEY}&language=${DEFAULT_LANG}&query=${query}&page=${page}`
+    return axios.get(url, options)
+            .then((response) => {
+                // dispatch(filmDataFetch(response.data))
+                // dispatch(filmDataLoading(false))
+                console.log(response.data.results)
+            })
+            .catch((error) => {
+                console.log(error.message)
+                // dispatch(filmDataError(error.message))
+                // dispatch(filmDataLoading(false))
+                // setTimeout((link, options) => fetchDataFilm(link, options), 1000)
+            })
+}
+
 
 function fetchDataFilm(link, options) {
     const url = `${DOMAIN}/${link}?api_key=${API_KEY}&language=${DEFAULT_LANG}`
@@ -69,4 +86,4 @@ function makeUrl(link) {
     return `${DOMAIN}/${link}?api_key=${API_KEY}&language=${DEFAULT_LANG}`
 }
 
-export {makeUrl, fetchDataFilm, fetchDataTop, fetchConfigApi}
+export {makeUrl, fetchDataFilm, fetchDataTop, fetchConfigApi, fetchSearch}

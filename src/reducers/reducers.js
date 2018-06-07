@@ -6,7 +6,7 @@ import {
     CONFIG_DATA_FETCH_IMAGES,
     TOP_FILM_DATA_FETCH,
     TOP_FILM_DATA_IS_LOADING,
-    TOP_FILM_DATA_ERROR, FILM_DATA_SAVE, FILM_DATA_REMOVE
+    TOP_FILM_DATA_ERROR, FILM_DATA_SAVE, FILM_DATA_REMOVE, SEARCH_DATA_FETCH, SEARCH_DATA_REQUEST
 } from '../constants/constants'
 
 
@@ -105,6 +105,30 @@ export function configApiReducer(state, action) {
                 ...state,
                 lang: action.data
             }
+
+        default:
+            return state;
+    }
+}
+
+export function searchReducer(state, action) {
+    if (!state) state = {
+        data: {},
+        request: ''
+    }
+    switch (action.type) {
+        case SEARCH_DATA_FETCH:
+            return {
+                ...state,
+                data: action.data
+            }
+
+        case SEARCH_DATA_REQUEST:
+            return {
+                ...state,
+                request: action.request
+            }
+
 
         default:
             return state;

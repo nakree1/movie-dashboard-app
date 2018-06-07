@@ -8,7 +8,5 @@ import getImageLink from '../actions/getImageLink'
 
 class SearchContainer extends React.Component {
 
-    render(){
 
-    }
 }

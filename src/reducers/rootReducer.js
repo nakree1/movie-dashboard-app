@@ -6,7 +6,7 @@ import
     filmDataReducer,
     topFilmDataReducer,
     savedDataReducer,
-    configApiReducer
+    configApiReducer, searchReducer
 
 } from './reducers'
 
@@ -15,6 +15,7 @@ export default combineReducers({
     cachedFilm: filmDataReducer,
     cachedTop: topFilmDataReducer,
     savedFilms: savedDataReducer,
+    search: searchReducer,
     routing: routerReducer
 });
 
