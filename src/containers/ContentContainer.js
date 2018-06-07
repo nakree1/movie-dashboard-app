@@ -6,10 +6,12 @@ import SavedContainer from './SavedContainer'
 import WrongRoute from '../components/WrongRoute'
 import HomeContent from "../components/HomeContent"
 
+import './ContentContainer.scss'
+
 class ContentContainer extends React.Component {
     render() {
         return (
-            <main className="col mt-3">
+            <main className="col">
                 <Switch>
                     <Route exact path="/" component={HomeContent}/>
                     <Route path="/top/:page" component={TopContainer}/>

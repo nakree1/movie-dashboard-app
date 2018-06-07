@@ -1,17 +1,36 @@
 import React from 'react'
 import {NavLink, Redirect} from 'react-router-dom'
+import './Sidebar.scss'
 
 class Sidebar extends React.Component {
     render() {
         return (
-            <div className="col-2 alert alert-secondary h-100">
-                <div className="btn-group-vertical btn-group-lg w-100">
-                        <NavLink exact to="/" className="btn btn-outline-secondary">Home</NavLink>
-                        <NavLink to="/top" className="btn btn-outline-secondary">Top Rated</NavLink>
-                        <NavLink to="/saved" className="btn btn-outline-secondary">Saved</NavLink>
-                        <NavLink to="/wrongroute" className="btn btn-outline-secondary">Wrong Route</NavLink>
+            <nav className="col-md-2 d-none d-md-block bg-light sidebar w-100">
+                <div className="sidebar-sticky">
+                    <ul className="nav flex-column">
+                        <li className="nav-item">
+                            <NavLink exact to="/"
+                                     activeClassName="text-primary"
+                                     className="nav-link h4">Home</NavLink></li>
+                        <li className="nav-item">
+                            <NavLink to="/top"
+                                     activeClassName="text-primary"
+                                     className="nav-link h4">Top Rated</NavLink></li>
+                        <li className="nav-item">
+                            <NavLink to="/saved"
+                                     activeClassName="text-primary"
+                                     className="nav-link h4">Saved</NavLink></li>
+                        <li className="nav-item">
+                            <NavLink to="/wrongroute"
+                                     activeClassName="text-primary"
+                                     className="nav-link h4">Wrong Route</NavLink></li>
+                    </ul>
+
+
+
+
                 </div>
-            </div>
+            </nav>
         )
     }
 }
