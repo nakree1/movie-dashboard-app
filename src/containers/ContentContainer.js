@@ -5,6 +5,7 @@ import FilmContainer from './FilmContainer'
 import SavedContainer from './SavedContainer'
 import WrongRoute from '../components/WrongRoute'
 import HomeContent from "../components/HomeContent"
+import SearchContainer from './SearchContainer'
 
 import './ContentContainer.scss'
 
@@ -18,6 +19,7 @@ class ContentContainer extends React.Component {
                     <Redirect from="/top" to="/top/1"/>
                     <Route path="/film/:id" component={FilmContainer}/>
                     <Route path="/saved" component={SavedContainer}/>
+                    <Route path="/search" component={SearchContainer}/>
                     <Route component={WrongRoute}/>
                 </Switch>
             </main>

@@ -9,7 +9,7 @@ const extractSass = new ExtractTextPlugin({
 });
 
 const bundleAnalyzer = new BundleAnalyzerPlugin({
-	analyzerMode: 'server',
+    analyzerMode: 'server',
   analyzerHost: 'localhost',
   analyzerPort: 8888,
   reportFilename: 'report.html',
@@ -59,8 +59,7 @@ let conf = {
 	},
 	plugins: [
 		cleanDist,
-    extractSass,
-    bundleAnalyzer
+    extractSass
   ]
 };
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import {Route, Switch} from 'react-router-dom'
-import SearchInput from './SearchInput'
+import SearchInputContainer from '../containers/SearchInputContainer'
 import './HeaderBar.scss'
 
 class HeaderBar extends React.Component {
@@ -13,10 +13,11 @@ class HeaderBar extends React.Component {
                         <Route path="/film" render={() => ('Film Header')}/>
                         <Route path="/top" render={() => ('Top Rated Films')}/>
                         <Route path="/saved" render={() => ('Saved Films')}/>
+                        <Route path="/search" render={() => ('Search')}/>
                         <Route render={() => ('Page 404')}/>
                     </Switch>
                 </div>
-                <SearchInput/>
+                <Route component={SearchInputContainer}/>
             </nav>
         )
     }

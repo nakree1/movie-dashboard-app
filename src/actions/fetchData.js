@@ -4,20 +4,25 @@ import {
     filmDataError,
     filmDataFetch,
     filmDataLoading,
+    searchRequest,
+    searchData,
     topFilmDataError,
     topFilmDataFetch,
     topFilmDataLoading
 } from './actions'
 import {API_KEY, DEFAULT_LANG, DOMAIN} from "../constants/constants"
+import groupData from "./groupData";
 
 function fetchSearch(query, page = 1, options) {
     const link = '3/search/multi'
     const url = `${DOMAIN}/${link}?api_key=${API_KEY}&language=${DEFAULT_LANG}&query=${query}&page=${page}`
-    return axios.get(url, options)
+    return (dispatch) => {
+        axios.get(url, options)
             .then((response) => {
-                // dispatch(filmDataFetch(response.data))
-                // dispatch(filmDataLoading(false))
-                console.log(response.data.results)
+                console.log(groupData(response.data))
+                dispatch(searchRequest(query))
+                dispatch(searchData(groupData(response.data)))
+                console.log(response.data)
             })
             .catch((error) => {
                 console.log(error.message)
@@ -25,6 +30,8 @@ function fetchSearch(query, page = 1, options) {
                 // dispatch(filmDataLoading(false))
                 // setTimeout((link, options) => fetchDataFilm(link, options), 1000)
             })
+    }
+
 }
 
 
