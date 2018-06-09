@@ -1,7 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {withRouter} from 'react-router-dom'
-import {history} from 'react-router'
+import {withRouter, history} from 'react-router-dom'
 import SavedContent from '../components/SavedContent'
 import {filmDataRemove} from "../actions/actions";
 

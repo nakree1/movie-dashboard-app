@@ -1,8 +1,7 @@
 import React, { PropTypes} from 'react'
 import {fetchDataTop} from '../actions/fetchData'
 import {connect} from 'react-redux'
-import {Link, Redirect, withRouter, browserHistory} from 'react-router-dom'
-import {history} from 'react-router'
+import {Link, Redirect, withRouter, history} from 'react-router-dom'
 import getImageLink from '../actions/getImageLink'
 import axios from 'axios'
 
