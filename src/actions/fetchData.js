@@ -13,15 +13,52 @@ import {
 import {API_KEY, DEFAULT_LANG, DOMAIN} from "../constants/constants"
 import groupData from "./groupData";
 
-function fetchSearch(query, page = 1, options) {
-    const link = '3/search/multi'
-    const url = `${DOMAIN}/${link}?api_key=${API_KEY}&language=${DEFAULT_LANG}&query=${query}&page=${page}`
+function fetchSearch(queryData, page = 1, options) {
+    // let query = {
+    //     request: null,
+    //     type: null,
+    //     data: null
+    // }
+    let query = {},
+        link,
+        url
+
+    if (typeof queryData === 'string') {
+        query.type = 'multi'
+        query.request = queryData
+    } else {
+        query = queryData
+    }
+
+    console.log(`query is:`)
+    console.log(query)
+    switch (query.type) {
+        case 'multi':
+            link = '3/search/multi'
+            url = `${DOMAIN}/${link}?api_key=${API_KEY}&language=${DEFAULT_LANG}&query=${query.request}&page=${page}`
+            break
+
+        case 'genres':
+            link = '3/discover/movie'
+            const genres = query.data
+            url = `${DOMAIN}/${link}?api_key=${API_KEY}&language=${DEFAULT_LANG}&sort_by=vote_average.asc&page=${page}&with_genres=${genres}`
+            break
+    }
+
     return (dispatch) => {
         axios.get(url, options)
             .then((response) => {
-                console.log(groupData(response.data))
                 dispatch(searchRequest(query))
-                dispatch(searchData(groupData(response.data)))
+                if (query.type === 'multi') {
+                    dispatch(searchData(groupData(response.data)))
+                }
+                if (query.type === 'genres') {
+                    dispatch(searchData(response.data))
+                }
+
+                console.log('Data Fetch Url:')
+                console.log(url)
+                console.log('Data Fetch Response:')
                 console.log(response.data)
             })
             .catch((error) => {

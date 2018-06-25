@@ -47,6 +47,7 @@ class FilmContainer extends React.Component {
             prevUrl={this.props.prevUrl}
             saveFilm={this.saveFilm}
             routeBack={this.routeBack}
+            history={this.props.history}
 
         />
     }

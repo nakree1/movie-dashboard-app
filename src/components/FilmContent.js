@@ -1,12 +1,13 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-
+import Rating from "./Rating";
+import GenresContainer from "../containers/GenresContainer";
 
 
 class FilmContent extends React.Component {
 
     render() {
-        const {data, isLoading, errorMessage, prevUrl = 1} = this.props
+        const {data, isLoading, errorMessage, prevUrl = 1, history} = this.props
 
         if (errorMessage.length !== 0) return <div className="alert alert-danger">Error: {errorMessage}</div>
         else if (isLoading) return <div className="alert alert-info">Data is loading...</div>
@@ -21,7 +22,9 @@ class FilmContent extends React.Component {
                         </div>
                         <div className="col">
                             <h1>{data.title}</h1>
-                            <h3>{data.tagline}</h3>
+                            <h4>{data.tagline}</h4>
+                            <Rating rate={data.vote_average}/>
+                            <GenresContainer genres={data.genres} history={history}/>
                             <div className="text-muted">{data.release_date}</div>
                             <p>{data.overview}</p>
                             <p>Film ID: {data.id}</p>

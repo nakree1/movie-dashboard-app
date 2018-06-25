@@ -1,5 +1,6 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
+import Rating from "./Rating";
 
 
 class TopContent extends React.Component {
@@ -36,15 +37,17 @@ class TopContent extends React.Component {
 
         const list = (data !== null) ? data.map((item) => {
             return (
-                <div className="card mb-4 mx-2" style={{width: '15%'}} key={item.id}>
+                <div className="card mb-4 mx-2" style={{width: '18%'}} key={item.id}>
                     <img
                         src={item.imageLink}
                         className="card-img-top"
+                        style={{height: '80%'}}
                     />
                     <div className="card-body">
                         <p className="card-text">
                             <Link to={`/film/${item.id}`} >
                                 {item.title}
+                                <Rating rate={item.vote_average}/>
                             </Link>
                         </p>
                     </div>
