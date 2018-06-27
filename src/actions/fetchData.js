@@ -13,6 +13,19 @@ import {
 import {API_KEY, DEFAULT_LANG, DOMAIN} from "../constants/constants"
 import groupData from "./groupData";
 
+function fetchAnyData(link, options) {
+    const url = `${DOMAIN}/3/${link}?api_key=${API_KEY}&language=${DEFAULT_LANG}`
+    return axios.get(url, options)
+            .then((response) => {
+                console.log(response.data)
+                return response.data
+            })
+            .catch((error) => {
+                console.log(error.message)
+                return {}
+})
+}
+
 function fetchSearch(queryData, page = 1, options) {
     // let query = {
     //     request: null,
@@ -72,8 +85,9 @@ function fetchSearch(queryData, page = 1, options) {
 }
 
 
-function fetchDataFilm(link, options) {
+function fetchDataFilm(link, options, delay = 1000) {
     const url = `${DOMAIN}/${link}?api_key=${API_KEY}&language=${DEFAULT_LANG}`
+    delay = delay * 2
     return (dispatch) => {
         dispatch(filmDataLoading(true))
         axios.get(url, options)
@@ -85,7 +99,7 @@ function fetchDataFilm(link, options) {
                 console.log(error.message)
                 dispatch(filmDataError(error.message))
                 dispatch(filmDataLoading(false))
-                setTimeout((link, options) => fetchDataFilm(link, options), 1000)
+                setTimeout((link, options, delay) => fetchDataFilm(link, options, delay), delay)
             })
     }
 }
@@ -130,4 +144,4 @@ function makeUrl(link) {
     return `${DOMAIN}/${link}?api_key=${API_KEY}&language=${DEFAULT_LANG}`
 }
 
-export {makeUrl, fetchDataFilm, fetchDataTop, fetchConfigApi, fetchSearch}
+export {makeUrl, fetchDataFilm, fetchDataTop, fetchConfigApi, fetchSearch, fetchAnyData}

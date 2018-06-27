@@ -13,6 +13,7 @@ class SearchInputContainer extends React.Component  {
 
     emitChange = debounce((value) => {
         console.log(value)
+        console.log(this.props.data)
         this.props.fetchSearch(value)
     }, 700)
 
@@ -21,13 +22,13 @@ class SearchInputContainer extends React.Component  {
         this.emitChange.cancel()
         this.props.fetchSearch(e.target.value)
         this.props.history.push('/search')
-
     }
 
     render() {
         return <SearchInput
             handleChange={this.handleChange}
             handleKeyPress={this.handleKeyPress}
+            data={this.props.data}
         />
     }
 }
@@ -35,7 +36,7 @@ class SearchInputContainer extends React.Component  {
 
 const mapStateToProps = (state) => {
     return {
-
+        data: state.search.data
     }
 };
 

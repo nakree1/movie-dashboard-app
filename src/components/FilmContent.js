@@ -2,6 +2,7 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 import Rating from "./Rating";
 import GenresContainer from "../containers/GenresContainer";
+import RecommendFilmContainer from "../containers/RecommendFilmContainer";
 
 
 class FilmContent extends React.Component {
@@ -32,7 +33,11 @@ class FilmContent extends React.Component {
                                 <button className="btn btn-primary btn-lg w-25 py-2 mb-4" onClick={this.props.saveFilm}>Save</button>
                                 <button className="btn btn-success btn-lg w-25 py-2" onClick={this.props.routeBack}>Back</button>
                             </div>
-
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col">
+                            <RecommendFilmContainer link={`movie/${data.id}/recommendations`}/>
                         </div>
                     </div>
                 </div>

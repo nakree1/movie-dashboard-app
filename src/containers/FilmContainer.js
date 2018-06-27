@@ -17,6 +17,16 @@ class FilmContainer extends React.Component {
         })
     }
 
+    componentDidUpdate(prevProps) {
+        if (this.props.location.pathname !== prevProps.location.pathname) {
+            this.props.fetchData((`3/movie/${this.props.match.params.id}`), {
+                validateStatus: (status) => {
+                    return status === 200; // Reject only if (false) the status code is not equal 200
+                }
+            })
+        }
+    }
+
     componentWillUnmount() {
         console.log('--unmount film container')
     }
