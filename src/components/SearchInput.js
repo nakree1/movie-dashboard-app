@@ -4,6 +4,13 @@ import './SearchInput.scss'
 
 
 class SearchInput extends React.Component {
+    // constructor(props){
+    //     super(props)
+    //
+    //     this.state = {
+    //         isModalOpen: false
+    //     }
+    // }
 
 
     render() {
@@ -25,15 +32,14 @@ class SearchInput extends React.Component {
             ? data.personResults.slice(0, 3).map((item) => {return <p key={item.id}>{item.name}</p>})
             : null
 
-        // const results = data && this.props.isModalOpen ? <div className="my-modal">
-        //     <p className="h5">Films:</p>
-        //     {films}
-        //     <p className="h5">TV:</p>
-        //     {tv}
-        //     <p className="h5">Persons:</p>
-        //     {person}
-        // </div> : null
-        const results = null
+        const results = data && this.props.isModalOpen ? <div className="my-modal">
+            <p className="h5">Films:</p>
+            {films}
+            <p className="h5">TV:</p>
+            {tv}
+            <p className="h5">Persons:</p>
+            {person}
+        </div> : null
 
         console.log('SearchInputData:')
         console.log(this.props.data)
@@ -43,7 +49,7 @@ class SearchInput extends React.Component {
         console.log(person)
 
         return (
-            <div className="w-100">
+            <div className="w-100 search-bar">
                 <input
                     type="text"
                     className="form-control-dark form-control w-100"
