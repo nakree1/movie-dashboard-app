@@ -11,9 +11,6 @@ class SearchInputContainer extends React.Component  {
         this.state = {
             isModalOpen: false
         }
-
-
-
     }
 
     componentDidMount() {
@@ -43,8 +40,10 @@ class SearchInputContainer extends React.Component  {
     }
 
     closeModalHandler = (e) => {
-        if (e.target === document.body.querySelector('my-modal')) return
+        if (e.target.matches('a')) this.setState({isModalOpen: false})
+        if (e.target.closest('.my-modal') === document.body.querySelector('.my-modal')) return
         if (this.state.isModalOpen === true) this.setState({isModalOpen: false})
+
     }
 
     render() {
