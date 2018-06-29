@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
-
+import {filmDataRemove} from "../actions/actions";
 import {fetchDataFilm} from '../actions/fetchData'
 import getImageLink from '../actions/getImageLink'
 import saveFilm from "../actions/saveFilm";
@@ -33,11 +33,14 @@ class FilmContainer extends React.Component {
 
 
     saveFilm = () => {
-        console.log(this.props.data)
         this.props.saveFilm({
             ...this.props.data,
             imageLink: getImageLink(this.props.configApi, this.props.data.poster_path, 'poster', 'w342')
         })
+    }
+
+    deleteFromSaved = () => {
+        this.props.deleteFilm(this.props.data.id)
     }
 
     routeBack = () => {
@@ -56,9 +59,10 @@ class FilmContainer extends React.Component {
             data={data}
             prevUrl={this.props.prevUrl}
             saveFilm={this.saveFilm}
+            unsaveFilm={this.deleteFromSaved}
             routeBack={this.routeBack}
             history={this.props.history}
-
+            isFilmSaved={this.props.savedId.includes(data.id)}
         />
     }
 }
@@ -71,7 +75,8 @@ const mapStateToProps = (state) => {
         errorMessage: state.cachedFilm.errorMessage,
         data: state.cachedFilm.data,
         configApi: state.configApi,
-        prevUrl: state.cachedTop.data.page
+        prevUrl: state.cachedTop.data.page,
+        savedId: state.savedFilms.map((item) => {return item.id})
     }
 };
 
@@ -79,7 +84,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchData: (url) => dispatch(fetchDataFilm(url)),
-        saveFilm: (data) => dispatch(saveFilm(data))
+        saveFilm: (data) => dispatch(saveFilm(data)),
+        deleteFilm: (id) => dispatch(filmDataRemove(id))
     };
 };
 

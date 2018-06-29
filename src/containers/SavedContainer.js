@@ -8,7 +8,6 @@ import {filmDataRemove} from "../actions/actions";
 class SavedContainer extends React.Component {
 
     deleteFromSaved = (e) => {
-        console.log(e.target.name)
         if (!e.target.name) return
         this.props.delete(+e.target.name)
     }

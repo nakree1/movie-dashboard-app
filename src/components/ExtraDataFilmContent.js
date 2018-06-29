@@ -1,7 +1,7 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 
-class RecommendFilmsContent extends React.Component {
+class ExtraDataFilmContent extends React.Component {
     render() {
         console.log('RecommendFilmsContent data 1 is:')
         console.log(this.props.data)
@@ -14,10 +14,10 @@ class RecommendFilmsContent extends React.Component {
         console.log(data)
         return (
             <div>
-                <p className="h5 mt-2">Recommended Films:</p>
+                <p className="h5 mt-2">{this.props.title}</p>
                 <div className="">{list}</div>
             </div>
         )
     }
 }
-export default RecommendFilmsContent
+export default ExtraDataFilmContent
