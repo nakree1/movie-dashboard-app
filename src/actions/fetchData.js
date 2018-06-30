@@ -6,9 +6,9 @@ import {
     filmDataLoading,
     searchRequest,
     searchData,
-    topFilmDataError,
-    topFilmDataFetch,
-    topFilmDataLoading
+    multiDataError,
+    multiDataFetch,
+    multiDataLoading
 } from './actions'
 import {API_KEY, DEFAULT_LANG, DOMAIN} from "../constants/constants"
 import groupData from "./groupData";
@@ -104,21 +104,21 @@ function fetchDataFilm(link, options, delay = 1000) {
     }
 }
 
-function fetchDataTop(page = 1, options) {
-    const link = '3/movie/top_rated'
+function fetchDataMulti(page = 1, options) {
+    const link = `3/movie/${options.type}`
     const url = `${DOMAIN}/${link}?api_key=${API_KEY}&language=${DEFAULT_LANG}&page=${page}`
     return (dispatch) => {
-        // dispatch(topFilmDataLoading(true))
+        // dispatch(multiDataLoading(true))
         axios.get(url, options)
             .then((response) => {
                 console.log(response.data)
-                dispatch(topFilmDataFetch(response.data))
-                dispatch(topFilmDataLoading(false))
+                dispatch(multiDataFetch(response.data))
+                dispatch(multiDataLoading(false))
             })
             .catch((error) => {
                 console.log(error.message)
-                dispatch(topFilmDataError(error.message))
-                dispatch(topFilmDataLoading(false))
+                dispatch(multiDataError(error.message))
+                dispatch(multiDataLoading(false))
             })
     }
 }
@@ -144,4 +144,4 @@ function makeUrl(link) {
     return `${DOMAIN}/${link}?api_key=${API_KEY}&language=${DEFAULT_LANG}`
 }
 
-export {makeUrl, fetchDataFilm, fetchDataTop, fetchConfigApi, fetchSearch, fetchAnyData}
+export {makeUrl, fetchDataFilm, fetchDataMulti, fetchConfigApi, fetchSearch, fetchAnyData}

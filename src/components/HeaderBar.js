@@ -12,6 +12,9 @@ class HeaderBar extends React.Component {
                         <Route exact path="/" render={() => ('Home')}/>
                         <Route path="/film" render={() => ('Film Header')}/>
                         <Route path="/top" render={() => ('Top Rated Films')}/>
+                        <Route path="/now" render={() => ('Now Playing Films')}/>
+                        <Route path="/upcoming" render={() => ('Upcoming Films')}/>
+                        <Route path="/popular" render={() => ('Popular Films')}/>
                         <Route path="/saved" render={() => ('Saved Films')}/>
                         <Route path="/search" render={() => ('Search')}/>
                         <Route render={() => ('Page 404')}/>

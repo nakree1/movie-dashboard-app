@@ -75,7 +75,7 @@ const mapStateToProps = (state) => {
         errorMessage: state.cachedFilm.errorMessage,
         data: state.cachedFilm.data,
         configApi: state.configApi,
-        prevUrl: state.cachedTop.data.page,
+        prevUrl: state.cachedFilms.data.page,
         savedId: state.savedFilms.map((item) => {return item.id})
     }
 };

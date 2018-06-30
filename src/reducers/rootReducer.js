@@ -4,7 +4,7 @@ import {routerReducer} from 'react-router-redux'
 import
 {
     filmDataReducer,
-    topFilmDataReducer,
+    multiDataReducer,
     savedDataReducer,
     configApiReducer, searchReducer
 
@@ -13,7 +13,7 @@ import
 export default combineReducers({
     configApi: configApiReducer,
     cachedFilm: filmDataReducer,
-    cachedTop: topFilmDataReducer,
+    cachedFilms: multiDataReducer,
     savedFilms: savedDataReducer,
     search: searchReducer,
     routing: routerReducer

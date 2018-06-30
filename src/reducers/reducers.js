@@ -4,9 +4,9 @@ import {
     FILM_DATA_IS_LOADING,
     CONFIG_DATA_FETCH_LANG,
     CONFIG_DATA_FETCH_IMAGES,
-    TOP_FILM_DATA_FETCH,
-    TOP_FILM_DATA_IS_LOADING,
-    TOP_FILM_DATA_ERROR, FILM_DATA_SAVE, FILM_DATA_REMOVE, SEARCH_DATA_FETCH, SEARCH_DATA_REQUEST
+    MULTI_DATA_FETCH,
+    MULTI_DATA_IS_LOADING,
+    MULTI_DATA_ERROR, FILM_DATA_SAVE, FILM_DATA_REMOVE, SEARCH_DATA_FETCH, SEARCH_DATA_REQUEST
 } from '../constants/constants'
 
 
@@ -57,7 +57,7 @@ export function filmDataReducer(state, action) {
     }
 }
 
-export function topFilmDataReducer(state, action) {
+export function multiDataReducer(state, action) {
     if (!state) state = {
         isLoading: true,
         errorMessage: '',
@@ -65,19 +65,19 @@ export function topFilmDataReducer(state, action) {
     }
 
     switch (action.type) {
-        case TOP_FILM_DATA_FETCH:
+        case MULTI_DATA_FETCH:
             return {
                 ...state,
                 data: action.data
             };
 
-        case TOP_FILM_DATA_IS_LOADING:
+        case MULTI_DATA_IS_LOADING:
             return {
                 ...state,
                 isLoading: action.isLoading
             };
 
-        case TOP_FILM_DATA_ERROR:
+        case MULTI_DATA_ERROR:
             return {
                 ...state,
                 errorMessage: action.errorMessage

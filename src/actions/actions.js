@@ -6,9 +6,9 @@ import {
     FILM_DATA_IS_LOADING,
     FILM_DATA_SAVE,
     FILM_DATA_REMOVE,
-    TOP_FILM_DATA_ERROR,
-    TOP_FILM_DATA_FETCH,
-    TOP_FILM_DATA_IS_LOADING, SEARCH_DATA_FETCH, SEARCH_DATA_REQUEST
+    MULTI_DATA_ERROR,
+    MULTI_DATA_FETCH,
+    MULTI_DATA_IS_LOADING, SEARCH_DATA_FETCH, SEARCH_DATA_REQUEST
 } from '../constants/constants'
 
 //Film Content
@@ -50,23 +50,23 @@ export function filmDataLoading(bool) {
 
 //Top Content
 
-export function topFilmDataFetch(data) {
+export function multiDataFetch(data) {
     return {
-        type: TOP_FILM_DATA_FETCH,
+        type: MULTI_DATA_FETCH,
         data: data
     };
 }
 
-export function topFilmDataLoading(bool) {
+export function multiDataLoading(bool) {
     return {
-        type: TOP_FILM_DATA_IS_LOADING,
+        type: MULTI_DATA_IS_LOADING,
         isLoading: bool
     };
 }
 
-export function topFilmDataError(error) {
+export function multiDataError(error) {
     return {
-        type: TOP_FILM_DATA_ERROR,
+        type: MULTI_DATA_ERROR,
         errorMessage: error
     };
 }

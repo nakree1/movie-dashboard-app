@@ -4,6 +4,7 @@ import Rating from "./Rating";
 import Money from './Money'
 import GenresContainer from "../containers/GenresContainer";
 import ExtraDataFilmContainer from "../containers/ExtraDataFilmContainer";
+import CreditsContainer from '../containers/CreditsContainer'
 import ReviewsContainer from '../containers/ReviewsContainer'
 
 
@@ -67,6 +68,12 @@ class FilmContent extends React.Component {
                             <ExtraDataFilmContainer link={`movie/${data.id}/similar`} title='Similar Films:'/>
                         </div>
                     </div>
+                    <div className="row">
+                        <div className="col">
+                            <CreditsContainer link={`movie/${data.id}/credits`} title='Credits:'/>
+                        </div>
+                    </div>
+
                     <div className="row">
                         <div className="col">
                             <ReviewsContainer link={`movie/${data.id}/reviews`} title='Reviews:'/>

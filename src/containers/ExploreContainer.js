@@ -1,22 +1,21 @@
 import React from 'react'
-import {fetchDataTop} from '../actions/fetchData'
+import {fetchDataMulti} from '../actions/fetchData'
 import {connect} from 'react-redux'
 import {Link, Redirect, withRouter, browserHistory} from 'react-router-dom'
 import {history} from 'react-router'
 import getImageLink from '../actions/getImageLink'
-import TopContent from '../components/TopContent'
+import ExploreContent from '../components/ExploreContent'
 
 
-class TopContainer extends React.Component {
+class ExploreContainer extends React.Component {
 
     componentDidMount() {
-        // console.log('--mounting TopContainer')
-        // console.log(this.props)
-
+        console.log(this.props)
         this.props.fetchData((this.props.match.params.page ? this.props.match.params.page : "1"), {
             validateStatus: (status) => {
                 return status === 200;
-            }
+            },
+            type: this.props.type
         })
     }
 
@@ -26,7 +25,8 @@ class TopContainer extends React.Component {
         this.props.fetchData((nextProps.match.params.page ? nextProps.match.params.page : "1"), {
             validateStatus: (status) => {
                 return status === 200; // Reject only if (false) the status code is not equal 200
-            }
+            },
+            type: this.props.type
         })
     }
 
@@ -34,24 +34,29 @@ class TopContainer extends React.Component {
         // console.log('--unmount TopContainer')
     }
 
-    handleClick = (e) => {
+    handleClick = (name) => {
         const page = this.props.match.params.page
         const totalPages = this.props.totalPages
-        switch (e.target.name) {
+        let link = this.props.type
+
+        if (link === 'top_rated') link = 'top'
+        if (link === 'now_playing') link = 'now'
+
+        switch (name) {
             case 'return':
                 // this.state.currentPage = 1
-                this.props.history.push(`/top/1`)
+                this.props.history.push(`/${link}/1`)
                 break;
 
             case 'next':
                 if (page >= totalPages) return// (this.props.totalPages == (this.state.currentPage + 1)) ? null : this.state.currentPage = this.state.currentPage + 1
-                this.props.history.push(`/top/${ +page + 1}`)
+                this.props.history.push(`/${link}/${ +page + 1}`)
 
                 break;
 
             case 'prev':
                 if (page <= 1) return
-                this.props.history.push(`/top/${ +this.props.match.params.page - 1}`)
+                this.props.history.push(`/${link}/${ +this.props.match.params.page - 1}`)
                 break;
         }
     }
@@ -63,11 +68,7 @@ class TopContainer extends React.Component {
                 return item
             }) : null
 
-
-
-
-
-        return <TopContent
+        return <ExploreContent
             data={data}
             handlePagination={this.handleClick}
             page={this.props.match.params.page}
@@ -80,12 +81,12 @@ class TopContainer extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        isLoading: state.cachedTop.isLoading,
-        errorMessage: state.cachedTop.errorMessage,
-        data: state.cachedTop.data.results,
-        page: state.cachedTop.data.page,
-        totalPages: state.cachedTop.data.total_pages,
-        totalResults: state.cachedTop.data.total_results,
+        isLoading: state.cachedFilms.isLoading,
+        errorMessage: state.cachedFilms.errorMessage,
+        data: state.cachedFilms.data.results,
+        page: state.cachedFilms.data.page,
+        totalPages: state.cachedFilms.data.total_pages,
+        totalResults: state.cachedFilms.data.total_results,
         configApi: state.configApi
     }
 };
@@ -93,9 +94,9 @@ const mapStateToProps = (state) => {
 // make action
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchData: (page) => dispatch(fetchDataTop(page))
+        fetchData: (page, options) => dispatch(fetchDataMulti(page, options))
     };
 };
 
-withRouter(TopContainer)
-export default connect(mapStateToProps, mapDispatchToProps)(TopContainer)
+withRouter(ExploreContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(ExploreContainer)
