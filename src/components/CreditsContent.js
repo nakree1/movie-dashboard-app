@@ -22,7 +22,7 @@ export default class CreditsContent extends React.Component {
     render() {
         // const data = typeof(this.props.data) !== 'undefined' ? this.props.data: null
         const cast = this.props.data.cast  ? this.props.data.cast.map((item, index) => {
-            if (index > 4) return
+            if (index > 2) return
             return (
                 <tr key={item.id} className="bg-light mt-2">
                     <th scope="row">{index + 1}</th>
@@ -34,7 +34,7 @@ export default class CreditsContent extends React.Component {
 
         const crew = this.props.data.cast  ? this.props.data.crew.sort((a, b) => {return a.department > b.department ? 1 : -1})
             .map((item, index) => {
-            if (index > 4) {}
+            if (index > 2) return
             return (
                 <tr key={item.id} className="bg-light mt-2">
                     <th scope="row">{index + 1}</th>
@@ -52,7 +52,7 @@ export default class CreditsContent extends React.Component {
                     {this.props.title}
                     <Link to={{
                               pathname: `/film/${this.props.movieId}/credits`,
-                              state: { data: `hello from link. ID = ${this.props.movieId}` }
+                              state: { data: this.props.data }
                           }}
                           className="btn btn-success"
                     >Expand Credits</Link>
