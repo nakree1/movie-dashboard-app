@@ -6,8 +6,10 @@ import SavedContainer from './SavedContainer'
 import WrongRoute from '../components/WrongRoute'
 import HomeContent from "../components/HomeContent"
 import SearchContainer from './SearchContainer'
+import FullCreditsContainer from './FullCreditsContainer'
 
 import './ContentContainer.scss'
+import FullCreditsContent from "../components/FullCreditsContent";
 
 class ContentContainer extends React.Component {
     render() {
@@ -30,7 +32,8 @@ class ContentContainer extends React.Component {
 
                     <Route path="/person/:id" render={() => <h1 className="alert-warning alert">Work In Progress...</h1>} />
 
-                    <Route path="/film/:id" component={FilmContainer}/>
+                    <Route exact path="/film/:id" component={FilmContainer}/>
+                    <Route exact path="/film/:id/credits" component={FullCreditsContainer}/>
                     <Route path="/saved" component={SavedContainer}/>
                     <Route path="/search" component={SearchContainer}/>
                     <Route component={WrongRoute}/>

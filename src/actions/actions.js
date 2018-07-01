@@ -13,6 +13,7 @@ import {
 
 //Film Content
 
+
 export function filmDataFetch(data) {
     return {
         type: FILM_DATA_FETCH,

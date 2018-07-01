@@ -70,7 +70,7 @@ class FilmContent extends React.Component {
                     </div>
                     <div className="row">
                         <div className="col">
-                            <CreditsContainer link={`movie/${data.id}/credits`} title='Credits:'/>
+                            <CreditsContainer link={`movie/${data.id}/credits`} title='Credits:' movieId={data.id}/>
                         </div>
                     </div>
 
