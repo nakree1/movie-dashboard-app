@@ -18,7 +18,11 @@ export default class FullCreditsContainer extends React.Component {
         }
     }
 
+    routeBack = () => {
+        this.props.history.goBack()
+    }
+
     render() {
-        return <FullCreditsContent data={this.state.data}/>
+        return <FullCreditsContent data={this.state.data} routeBack={this.routeBack}/>
     }
 }
