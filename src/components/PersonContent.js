@@ -1,4 +1,5 @@
 import React from 'react'
+import Loader from '../components/Loader'
 
 
 
@@ -7,8 +8,15 @@ export default class PersonContent extends React.Component {
 
     render() {
         const data = this.props.data
+        if (data === null) return <Loader />
         console.log('PersonContent:')
         console.log(data)
+        const gender = () => {
+            if (data.gender === 1) return `Gender: Man`
+            if (data.gender === 2) return `Gender: Woman`
+            return null
+        }
+
         return (
             <div className="container-fluid my-4">
                 <div className="row">
@@ -20,7 +28,7 @@ export default class PersonContent extends React.Component {
                     </div>
                     <div className="col">
                         <h1>{data.name}</h1>
-                        <h4>{`Gender: ${data.gender === 0 ? 'Man' : 'Woman'}`}</h4>
+                        <h4>{() => gender()}</h4>
                         <div className="text-muted">{data.place_of_birth}</div>
                         <div className="text-muted">{data.birthday}</div>
                         <p>{data.biography}</p>
