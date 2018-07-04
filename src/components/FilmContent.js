@@ -6,6 +6,7 @@ import GenresContainer from "../containers/GenresContainer";
 import ExtraDataFilmContainer from "../containers/ExtraDataFilmContainer";
 import CreditsContainer from '../containers/CreditsContainer'
 import ReviewsContainer from '../containers/ReviewsContainer'
+import Loader from './Loader'
 
 
 class FilmContent extends React.Component {
@@ -32,7 +33,7 @@ class FilmContent extends React.Component {
         }
 
         if (errorMessage.length !== 0) return <div className="alert alert-danger">Error: {errorMessage}</div>
-        if (isLoading) return <div className="alert alert-info">Data is loading...</div>
+        if (isLoading) return <Loader />
 
         return (
                 <div className="container-fluid my-4">

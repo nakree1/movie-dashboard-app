@@ -6,16 +6,19 @@ import Loader from '../components/Loader'
 
 export default class PersonContent extends React.Component {
 
+    getGender = (num) => {
+        if (num === 1) return `Gender: Woman`
+        if (num === 2) return `Gender: Man`
+        return null
+    }
+
     render() {
         const data = this.props.data
-        if (data === null) return <Loader />
         console.log('PersonContent:')
         console.log(data)
-        const gender = () => {
-            if (data.gender === 1) return `Gender: Man`
-            if (data.gender === 2) return `Gender: Woman`
-            return null
-        }
+        if (data === null) return <Loader />
+
+        const gender = this.getGender(data.gender)
 
         return (
             <div className="container-fluid my-4">
@@ -28,7 +31,7 @@ export default class PersonContent extends React.Component {
                     </div>
                     <div className="col">
                         <h1>{data.name}</h1>
-                        <h4>{() => gender()}</h4>
+                        <h4>{gender}</h4>
                         <div className="text-muted">{data.place_of_birth}</div>
                         <div className="text-muted">{data.birthday}</div>
                         <p>{data.biography}</p>

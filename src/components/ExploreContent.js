@@ -1,6 +1,7 @@
 import React from 'react'
 import Pagination from './Pagination'
 import FilmCard from "./FilmCard";
+import Loader from "./Loader";
 
 
 export default class ExploreContent extends React.Component {
@@ -20,7 +21,7 @@ export default class ExploreContent extends React.Component {
         }) : null
 
         if (errorMessage.length !== 0) return <div className="alert alert-danger">Error: {errorMessage}</div>
-        if (isLoading) return <div className="alert alert-info">Data is loading...</div>
+        if (isLoading) return <Loader />
 
         return (
                 <div className="container-fluid">

@@ -1,9 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import Loader from "./Loader";
 
 export default class FullCreditsContent extends React.Component {
     getTable = (data, ...cols) => {
-        const columns = cols.map((item) => {return <th scope="col">{item}</th>})
+        const columns = cols.map((item, index) => {return <th key={index} scope="col">{item}</th>})
         return (
             <table className="table table-borderless">
                 <thead>
@@ -12,14 +13,14 @@ export default class FullCreditsContent extends React.Component {
                 </tr>
                 </thead>
                 <tbody>
-                {data}
+                    {data}
                 </tbody>
             </table>
         )
     }
 
     render() {
-        if (!this.props.data) return <h1>Empty</h1>
+        if (!this.props.data) return <Loader/>
         const cast = this.props.data.cast  ? this.props.data.cast.map((item, index) => {
             return (
                 <tr key={item.id} className="bg-light mt-2">
@@ -56,7 +57,7 @@ export default class FullCreditsContent extends React.Component {
             <div className="col">
                 <p className="h5 mt-2">
                     {this.props.title}
-                    <button className="btn btn-primary" onClick={() => this.props.routeBack()}>Back</button>
+                    <button className="btn btn-primary btn-lg" onClick={() => this.props.routeBack()}>Back</button>
                 </p>
                 {this.getTable(cast, '#', 'Character', 'Name')}
                 {this.getTable(crew, '#', 'Department', 'Job', 'Name')}

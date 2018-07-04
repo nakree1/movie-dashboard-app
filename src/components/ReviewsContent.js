@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 
 class ReviewsContent extends React.Component {
     constructor(props) {
@@ -26,21 +27,27 @@ class ReviewsContent extends React.Component {
             const author = item.author
             const originalText = item.content
             let truncatedText = originalText
-            if (originalText.length > 100) truncatedText = originalText.slice(0, 100).trim().concat('...')
+            if (originalText.length > 200) truncatedText = originalText.slice(0, 200).trim().concat('...')
             const text = this.state.expanded.includes(item.id) ? originalText : truncatedText
             return (
-                <div key={item.id} className="bg-light mt-2">
-                    <button className="btn btn-primary btn-sm  d-inline" onClick={() => {this.toggleText(item.id)} }>{author}</button>
-                    <p className="">{text}</p>
+                <div key={item.id} className=" my-2 p-2 btn-light" style={{cursor: `pointer`}} onClick={() => {this.toggleText(item.id)}}>
+                    <p className="h2 text-center">{author}</p>
+                    <p className="py-2 px-4">{text}</p>
                 </div>
                 )
         }) : null
 
 
         return (
-            <div className="col-6">
+            <div className="col">
                 <p className="h5 mt-2">{this.props.title}</p>
                 <div className="">{list}</div>
+                <Link to={{
+                    pathname: `/film/${this.props.movieId}/credits`,
+                    state: { data: this.props.data }
+                }}
+                      className="btn btn-primary btn-block mb-5"
+                >Expand Reviews</Link>
             </div>
         )
     }

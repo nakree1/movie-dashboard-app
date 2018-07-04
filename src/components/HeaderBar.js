@@ -10,7 +10,9 @@ class HeaderBar extends React.Component {
                 <div className="navbar-brand col-sm-3 col-md-2 mr-0 text-center">
                     <Switch>
                         <Route exact path="/" render={() => ('Home')}/>
-                        <Route path="/film" render={() => ('Film Header')}/>
+                        <Route exact path="/film/:id" render={() => ('About Film')}/>
+                        <Route path="/film/:id/credits" render={() => ('Credits')}/>
+                        <Route path="/person" render={() => ('About Person')}/>
                         <Route path="/top" render={() => ('Top Rated Films')}/>
                         <Route path="/now" render={() => ('Now Playing Films')}/>
                         <Route path="/upcoming" render={() => ('Upcoming Films')}/>

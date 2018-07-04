@@ -26,10 +26,13 @@ class PersonContainer extends React.Component {
     }
 
     render() {
-        const data = {
-            ...this.state.data,
-            imageLink: setSafe(() => getImageLink(this.props.configApi, this.state.data.profile_path, 'poster', 'original'))
-        }
+        const data = this.state.data === null
+            ? null
+            : {
+                ...this.state.data,
+                imageLink: setSafe(() => getImageLink(this.props.configApi, this.state.data.profile_path, 'poster', 'original'))
+            }
+
         console.log('PersonContainer:')
         console.log(data)
 
