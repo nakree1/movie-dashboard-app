@@ -48,7 +48,7 @@ class FilmContent extends React.Component {
                             <h1>{data.title}</h1>
                             <h4>{data.tagline}</h4>
                             <Money budget={data.budget} revenue={data.revenue} />
-                            <Rating rate={data.vote_average}/>
+                            <p>Rating:<Rating rate={data.vote_average}/></p>
                             <GenresContainer genres={data.genres} history={history}/>
                             <div className="text-muted">{data.release_date}</div>
                             <p>{data.overview}</p>

@@ -30,27 +30,39 @@ class SearchInputContainer extends React.Component  {
         console.log(this.props.data)
         this.props.fetchSearch(value)
         this.setState({isModalOpen: true})
-    }, 700)
+    }, 500)
 
     handleKeyPress = (e) => {
+        console.log(e)
         if (e.key !== 'Enter') return
         this.emitChange.cancel()
         this.props.fetchSearch(e.target.value)
-        this.props.history.push('/search')
+        this.historyPush(e.target.value)
+    }
+
+    openResults = (value) => {
+        this.emitChange.cancel()
+        if (this.state.isModalOpen === true) this.setState({isModalOpen: false})
+        this.props.fetchSearch(value)
+        this.historyPush(value)
     }
 
     closeModalHandler = (e) => {
         if (e.target.matches('a')) this.setState({isModalOpen: false})
         if (e.target.closest('.my-modal') === document.body.querySelector('.my-modal')) return
         if (this.state.isModalOpen === true) this.setState({isModalOpen: false})
+    }
 
+    historyPush = (str) => {
+        const query = encodeURIComponent(str)
+        this.props.history.push(`/search?query=${query}`)
     }
 
     render() {
         return <SearchInput
             handleChange={this.handleChange}
             handleKeyPress={this.handleKeyPress}
-            handleClick={this.handleClick}
+            handleClick={this.openResults}
             data={this.props.data}
             isModalOpen={this.state.isModalOpen}
         />

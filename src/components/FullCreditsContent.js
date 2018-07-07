@@ -55,10 +55,7 @@ export default class FullCreditsContent extends React.Component {
 
         return (
             <div className="col">
-                <p className="h5 mt-2">
-                    {this.props.title}
-                    <button className="btn btn-primary btn-lg" onClick={() => this.props.routeBack()}>Back</button>
-                </p>
+                <button className="btn btn-primary btn-lg" onClick={() => this.props.routeBack()}>Back</button>
                 {this.getTable(cast, '#', 'Character', 'Name')}
                 {this.getTable(crew, '#', 'Department', 'Job', 'Name')}
             </div>

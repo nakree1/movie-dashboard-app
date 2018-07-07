@@ -1,16 +1,12 @@
 import React from 'react'
 
 class SearchItemsList extends React.Component {
-    handleClick = (e) => {
-        e.preventDefault()
-        this.props.handleClick(`/film/${e.target.dataset.id}`)
-    }
 
     render() {
         const items = this.props.data || null
 
         const itemsList = items ? items.map((item) => {
-            return <li key={item.id}><a href={`#/film/${item.id}`} data-id={item.id}>{item.title || item.name}</a></li>
+            return <li key={item.id}><a href={`#/${item.title ? 'film' : 'person'}/${item.id}`} data-id={item.id}>{item.title || item.name}</a></li>
         }) : null
 
         const content = (itemsList === null || itemsList.length === 0)

@@ -6,7 +6,7 @@ export default class Rating extends React.Component {
         let style = null
 
         if (typeof rate !== 'number' || rate === 0) {
-            rate = '-.-'
+            rate = '-'
         } else {
             rate = rate.toFixed(1)
         }
@@ -16,6 +16,6 @@ export default class Rating extends React.Component {
         if (rate < 5) style = 'text-danger'
         if (rate === '-.-') style = 'text-secondary'
 
-        return <div className="flex-nowrap d-flex">Rating <p className={`${style} font-weight-bold  pl-2 m-0`}>{rate}</p></div>
+        return <span className={`${style} font-weight-bold pl-2 m-0`}>{rate}</span>
     }
 }

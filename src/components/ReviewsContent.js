@@ -37,13 +37,14 @@ class ReviewsContent extends React.Component {
                 )
         }) : null
 
-
+        console.log('this.props REVIEWS CONTENT')
+        console.log(this.props)
         return (
             <div className="col">
                 <p className="h5 mt-2">{this.props.title}</p>
                 <div className="">{list}</div>
                 <Link to={{
-                    pathname: `/film/${this.props.movieId}/credits`,
+                    pathname: `/film/${this.props.data.id}/reviews`,
                     state: { data: this.props.data }
                 }}
                       className="btn btn-primary btn-block mb-5"

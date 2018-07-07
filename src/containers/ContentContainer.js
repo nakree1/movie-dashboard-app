@@ -10,6 +10,7 @@ import FullCreditsContainer from './FullCreditsContainer'
 
 import './ContentContainer.scss'
 import PersonContainer from "./PersonContainer";
+import FullReviewsContainer from "./FullReviewsContainer";
 
 class ContentContainer extends React.Component {
     render() {
@@ -33,6 +34,7 @@ class ContentContainer extends React.Component {
 
                     <Route exact path="/film/:id" component={FilmContainer}/>
                     <Route exact path="/film/:id/credits" component={FullCreditsContainer}/>
+                    <Route exact path="/film/:id/reviews" component={FullReviewsContainer}/>
 
                     <Route exact path="/person/:id" component={PersonContainer}/>
 
