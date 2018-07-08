@@ -43,21 +43,27 @@ class ExploreContainer extends React.Component {
         if (link === 'now_playing') link = 'now'
 
         switch (name) {
-            case 'return':
-                // this.state.currentPage = 1
+            case 'first':
                 this.props.history.push(`/${link}/1`)
-                break;
+                break
+
+            case 'last':
+                this.props.history.push(`/${link}/${totalPages}`)
+                break
 
             case 'next':
                 if (page >= totalPages) return// (this.props.totalPages == (this.state.currentPage + 1)) ? null : this.state.currentPage = this.state.currentPage + 1
                 this.props.history.push(`/${link}/${ +page + 1}`)
-
-                break;
+                break
 
             case 'prev':
                 if (page <= 1) return
                 this.props.history.push(`/${link}/${ +this.props.match.params.page - 1}`)
-                break;
+                break
+
+            default:
+                this.props.history.push(`/${link}/${name}`)
+                break
         }
     }
 

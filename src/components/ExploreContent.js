@@ -29,7 +29,7 @@ export default class ExploreContent extends React.Component {
                         <div className="alert alert-info">Page: {this.props.page} Total: {this.props.totalPages}</div>
                     </div>
                     <div className="row d-flex justify-content-center mb-5">
-                        <Pagination handler={this.props.handlePagination} />
+                        <Pagination handler={this.props.handlePagination} page={+this.props.page} totalPages={this.props.totalPages}/>
                     </div>
                     <div className="row">
                         <div className="col d-flex flex-wrap">
