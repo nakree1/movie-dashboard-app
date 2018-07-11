@@ -6,10 +6,19 @@ import {fetchConfigApi} from "../actions/fetchData";
 
 
 
+//WHY DID YOU UPDATE
+
+if (process.env.NODE_ENV !== 'production') {
+    const {whyDidYouUpdate} = require('why-did-you-update')
+    whyDidYouUpdate(React)
+}
+
+
 class App extends React.Component {
     componentDidMount() {
         fetchConfigApi()
     }
+
 	render() {
 		return (
 			<div>

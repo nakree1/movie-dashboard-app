@@ -10,7 +10,7 @@ import ExploreContent from '../components/ExploreContent'
 class ExploreContainer extends React.Component {
 
     componentDidMount() {
-        console.log(this.props)
+        // console.log(this.props)
         this.props.fetchData((this.props.match.params.page ? this.props.match.params.page : "1"), {
             validateStatus: (status) => {
                 return status === 200;
@@ -65,6 +65,10 @@ class ExploreContainer extends React.Component {
                 this.props.history.push(`/${link}/${name}`)
                 break
         }
+    }
+
+    componentDidUpdate() {
+        window.stop()
     }
 
 

@@ -1,6 +1,15 @@
 import React from 'react'
+// import debounce from 'lodash-es/debounce'
 
 export default class FilmCard extends React.Component {
+
+    // emitClick = debounce((name) => {
+    //     this.props.handler(name)
+    // }, 200)
+    //
+    // handleClick = (name) => {
+    //     this.emitClick(name)
+    // }
 
     getPagination = (current, max, range = 5) => {
         let c = current
@@ -23,12 +32,12 @@ export default class FilmCard extends React.Component {
         //     return arr
         // }
 
-        console.log('Current:')
-        console.log(c)
-        console.log('Max:')
-        console.log(m)
-        console.log('Delta:')
-        console.log(delta)
+        // console.log('Current:')
+        // console.log(c)
+        // console.log('Max:')
+        // console.log(m)
+        // console.log('Delta:')
+        // console.log(delta)
 
         let right = c + delta > m ? m : c + delta
         let left = c - delta <= 1 ? 1 : c - delta
@@ -37,8 +46,8 @@ export default class FilmCard extends React.Component {
 
         let diffLeft = left - c
         let diffRight = right - c
-        console.log('left right diff <--')
-        console.log(diffLeft, diffRight)
+        // console.log('left right diff <--')
+        // console.log(diffLeft, diffRight)
 
         if (diffRight !== 2) left = left - diffRight
         if (diffLeft !== -2) right = right - diffLeft
@@ -47,10 +56,10 @@ export default class FilmCard extends React.Component {
         if (diffLeft === 0) right = right + diffRight
         if (diffRight === 0) left = left + diffLeft
 
-        console.log('left | right:')
-        console.log(left, right)
-        console.log('diff:')
-        console.log(diff)
+        // console.log('left | right:')
+        // console.log(left, right)
+        // console.log('diff:')
+        // console.log(diff)
 
         for (let i = left; i <= right; i++) {
             arr.push(i)
@@ -63,8 +72,8 @@ export default class FilmCard extends React.Component {
 
     // << < 6 8 9 10 11> >>
     render() {
-        console.log('pagination')
-        console.log(this.props)
+        // console.log('pagination')
+        // console.log(this.props)
         const {page, totalPages} = this.props
 
         const prevArrows = ['<<', '<']
@@ -72,7 +81,7 @@ export default class FilmCard extends React.Component {
         const pages = this.getPagination(page, totalPages)
         const pagination = [...prevArrows, ...pages, ...nextArrows]
 
-        console.log(pagination)
+        // console.log(pagination)
 
         // console.log(this.getPagination(1, 12))
         // console.log(this.getPagination(2, 12))

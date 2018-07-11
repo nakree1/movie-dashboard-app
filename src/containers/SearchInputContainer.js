@@ -5,7 +5,7 @@ import SearchInput from '../components/SearchInput'
 import {withRouter} from 'react-router-dom'
 import {connect} from 'react-redux'
 
-class SearchInputContainer extends React.Component  {
+class SearchInputContainer extends React.PureComponent  {
     constructor(props) {
         super(props)
         this.state = {

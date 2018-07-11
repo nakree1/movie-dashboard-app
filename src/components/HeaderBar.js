@@ -4,6 +4,11 @@ import SearchInputContainer from '../containers/SearchInputContainer'
 import './HeaderBar.scss'
 
 class HeaderBar extends React.Component {
+
+    // shouldComponentUpdate(prevProps) {
+    //     return prevProps.path !== this.props.path
+    // }
+    //
     render() {
         return (
             <nav className="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow mb-5">

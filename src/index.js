@@ -38,7 +38,7 @@ store.dispatch(filmDataSave({
     title:"The Dark Knight",
     imageLink:"http://image.tmdb.org/t/p//w342/1hRoyzDtpgMU7Dz4JF22RANzQO7.jpg"
 }))
-console.log(store.getState())
+// console.log(store.getState())
 
 render((
     <Provider store={store}>

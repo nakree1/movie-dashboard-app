@@ -66,8 +66,8 @@ class SearchInput extends React.Component {
             <button className="btn btn-primary btn-sm btn-block mt-4" onClick={() => this.props.handleClick(this.input.value)} >Open Results</button>
         </div> : null
 
-        console.log('REF ELEM <----')
-        console.log(this.inputSize)
+        // console.log('REF ELEM <----')
+        // console.log(this.inputSize)
 
         return (
             <div className="w-100 search-bar">

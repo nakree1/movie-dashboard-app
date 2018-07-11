@@ -16,6 +16,7 @@ export default class ExploreContent extends React.Component {
                     imageLink={item.imageLink}
                     title={item.title}
                     vote_average={item.vote_average}
+                    release_date={item.release_date}
                 />
             )
         }) : null

@@ -69,10 +69,10 @@ function fetchSearch(queryData, page = 1, options) {
                     dispatch(searchData(response.data))
                 }
 
-                console.log('Data Fetch Url:')
-                console.log(url)
-                console.log('Data Fetch Response:')
-                console.log(response.data)
+                // console.log('Data Fetch Url:')
+                // console.log(url)
+                // console.log('Data Fetch Response:')
+                // console.log(response.data)
             })
             .catch((error) => {
                 console.log(error.message)
@@ -96,7 +96,7 @@ function fetchDataFilm(link, options, delay = 1000) {
                 dispatch(filmDataLoading(false))
             })
             .catch((error) => {
-                console.log(error.message)
+                // console.log(error.message)
                 dispatch(filmDataError(error.message))
                 dispatch(filmDataLoading(false))
                 setTimeout((link, options, delay) => fetchDataFilm(link, options, delay), delay)
@@ -111,12 +111,12 @@ function fetchDataMulti(page = 1, options) {
         // dispatch(multiDataLoading(true))
         axios.get(url, options)
             .then((response) => {
-                console.log(response.data)
+                // console.log(response.data)
                 dispatch(multiDataFetch(response.data))
                 dispatch(multiDataLoading(false))
             })
             .catch((error) => {
-                console.log(error.message)
+                // console.log(error.message)
                 dispatch(multiDataError(error.message))
                 dispatch(multiDataLoading(false))
             })
@@ -133,8 +133,8 @@ function fetchConfigApi(options) {
                 dispatch(configDataFetchImages(response.data.images))
             })
             .catch((error) => {
-                console.log('fetchConfigApi:')
-                console.log(error.message)
+                // console.log('fetchConfigApi:')
+                // console.log(error.message)
                 setTimeout((options) => fetchConfigApi(options), 1000)
             })
     }

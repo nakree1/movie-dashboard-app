@@ -7,6 +7,7 @@ import ExtraDataFilmContainer from "../containers/ExtraDataFilmContainer";
 import CreditsContainer from '../containers/CreditsContainer'
 import ReviewsContainer from '../containers/ReviewsContainer'
 import Loader from './Loader'
+import FormatDate from './FormatDate'
 
 
 class FilmContent extends React.Component {
@@ -47,10 +48,11 @@ class FilmContent extends React.Component {
                         <div className="col">
                             <h1>{data.title}</h1>
                             <h4>{data.tagline}</h4>
+                            <FormatDate className="text-muted" date={data.release_date} />
                             <Money budget={data.budget} revenue={data.revenue} />
-                            <p>Rating:<Rating rate={data.vote_average}/></p>
+                            <span>Rating:<Rating rate={data.vote_average}/></span>
                             <GenresContainer genres={data.genres} history={history}/>
-                            <div className="text-muted">{data.release_date}</div>
+
                             <p>{data.overview}</p>
                             <p>Film ID: {data.id}</p>
                             <div className="flex-column d-flex">
