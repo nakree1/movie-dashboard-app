@@ -105,20 +105,19 @@ function fetchDataFilm(link, options, delay = 1000) {
 }
 
 function fetchDataMulti(page = 1, options) {
+    // (dispatch) => {dispatch(multiDataLoading(true))}
     const link = `3/movie/${options.type}`
     const url = `${DOMAIN}/${link}?api_key=${API_KEY}&language=${DEFAULT_LANG}&page=${page}`
     return (dispatch) => {
-        // dispatch(multiDataLoading(true))
+        dispatch(multiDataLoading(true))
         axios.get(url, options)
             .then((response) => {
                 // console.log(response.data)
                 dispatch(multiDataFetch(response.data))
-                dispatch(multiDataLoading(false))
             })
             .catch((error) => {
                 // console.log(error.message)
                 dispatch(multiDataError(error.message))
-                dispatch(multiDataLoading(false))
             })
     }
 }

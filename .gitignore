@@ -1,3 +1,4 @@
+src/constants/apiKey.js
 node_modules
 .idea
 *.xlsx

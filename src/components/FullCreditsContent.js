@@ -4,7 +4,7 @@ import Loader from "./Loader";
 
 export default class FullCreditsContent extends React.Component {
     getTable = (data, ...cols) => {
-        const columns = cols.map((item, index) => {return <th key={index} scope="col">{item}</th>})
+        const columns = cols.map((item, index) => {return <th key={data.length + index} scope="col">{item}</th>})
         return (
             <table className="table table-borderless">
                 <thead>

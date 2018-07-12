@@ -7,11 +7,14 @@ import {fetchConfigApi} from "../actions/fetchData";
 
 
 //WHY DID YOU UPDATE
-
-if (process.env.NODE_ENV !== 'production') {
-    const {whyDidYouUpdate} = require('why-did-you-update')
-    whyDidYouUpdate(React)
-}
+//
+// if (process.env.NODE_ENV !== 'production') {
+//     const {whyDidYouUpdate} = require('why-did-you-update')
+//     whyDidYouUpdate(React, {
+//         groupByComponent: true,
+//         collapseComponentGroups: false
+//     })
+// }
 
 
 class App extends React.Component {

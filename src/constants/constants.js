@@ -1,4 +1,6 @@
-export const API_KEY = 'b5f0098853db702baae85840063564e6'
+import { API_KEY as KEY } from './apiKey'
+
+export const API_KEY = KEY
 export const DOMAIN = 'https://api.themoviedb.org'
 export const DEFAULT_LANG = 'en-US'
 

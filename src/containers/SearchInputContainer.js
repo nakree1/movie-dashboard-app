@@ -5,7 +5,7 @@ import SearchInput from '../components/SearchInput'
 import {withRouter} from 'react-router-dom'
 import {connect} from 'react-redux'
 
-class SearchInputContainer extends React.PureComponent  {
+class SearchInputContainer extends React.Component  {
     constructor(props) {
         super(props)
         this.state = {
@@ -19,6 +19,11 @@ class SearchInputContainer extends React.PureComponent  {
 
     componentWillUnmount() {
         document.body.removeEventListener('click', this.closeModalHandler)
+    }
+
+    shouldComponentUpdate(nextProps) {
+        if (nextProps.location.pathname !== this.props.location.pathname) return false
+        return true
     }
 
     handleChange = (e) => {
@@ -59,6 +64,8 @@ class SearchInputContainer extends React.PureComponent  {
     }
 
     render() {
+        console.log('render SearchInputContainer')
+        console.log(this.props)
         return <SearchInput
             handleChange={this.handleChange}
             handleKeyPress={this.handleKeyPress}

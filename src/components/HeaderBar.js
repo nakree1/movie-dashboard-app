@@ -5,8 +5,8 @@ import './HeaderBar.scss'
 
 class HeaderBar extends React.Component {
 
-    // shouldComponentUpdate(prevProps) {
-    //     return prevProps.path !== this.props.path
+    // shouldComponentUpdate(nextProps) {
+    //     // return nextProps.path === this.props.path ? false : true
     // }
     //
     render() {
@@ -17,6 +17,7 @@ class HeaderBar extends React.Component {
                         <Route exact path="/" render={() => ('Home')}/>
                         <Route exact path="/film/:id" render={() => ('About Film')}/>
                         <Route path="/film/:id/credits" render={() => ('Credits')}/>
+                        <Route path="/film/:id/reviews" render={() => ('Reviews')}/>
                         <Route path="/person" render={() => ('About Person')}/>
                         <Route path="/top" render={() => ('Top Rated Films')}/>
                         <Route path="/now" render={() => ('Now Playing Films')}/>

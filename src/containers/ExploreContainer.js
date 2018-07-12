@@ -6,11 +6,22 @@ import {history} from 'react-router'
 import getImageLink from '../actions/getImageLink'
 import ExploreContent from '../components/ExploreContent'
 
+import setSafe from '../actions/setSafe'
+
 
 class ExploreContainer extends React.Component {
 
+    fetchData = (page = '1') => {
+        this.props.fetchData(page, {
+            validateStatus: (status) => {
+                return status === 200; // Reject only if (false) the status code is not equal 200
+            },
+            type: this.props.type
+        })
+    }
+
     componentDidMount() {
-        // console.log(this.props)
+        console.log('ComponentDidMount')
         this.props.fetchData((this.props.match.params.page ? this.props.match.params.page : "1"), {
             validateStatus: (status) => {
                 return status === 200;
@@ -19,23 +30,18 @@ class ExploreContainer extends React.Component {
         })
     }
 
-    componentWillUpdate(nextProps, nextState) {
-        if (nextProps.match.params.page === this.props.match.params.page) return
-
-        this.props.fetchData((nextProps.match.params.page ? nextProps.match.params.page : "1"), {
-            validateStatus: (status) => {
-                return status === 200; // Reject only if (false) the status code is not equal 200
-            },
-            type: this.props.type
-        })
+    shouldComponentUpdate(nextProps) {
+        if (nextProps.isLoading !== this.props.isLoading) return true
+        if (nextProps.page === this.props.page) return false
+        return true
     }
 
     componentWillUnmount() {
-        // console.log('--unmount TopContainer')
+        console.log('--unmount TopContainer')
     }
 
     handleClick = (name) => {
-        const page = this.props.match.params.page
+        const page = this.props.page
         const totalPages = this.props.totalPages
         let link = this.props.type
 
@@ -45,24 +51,29 @@ class ExploreContainer extends React.Component {
         switch (name) {
             case 'first':
                 this.props.history.push(`/${link}/1`)
+                this.fetchData('1')
                 break
 
             case 'last':
                 this.props.history.push(`/${link}/${totalPages}`)
+                this.fetchData(totalPages)
                 break
 
             case 'next':
-                if (page >= totalPages) return// (this.props.totalPages == (this.state.currentPage + 1)) ? null : this.state.currentPage = this.state.currentPage + 1
-                this.props.history.push(`/${link}/${ +page + 1}`)
+                if (page >= totalPages) return
+                this.props.history.push(`/${link}/${page + 1}`)
+                this.fetchData(page + 1)
                 break
 
             case 'prev':
                 if (page <= 1) return
-                this.props.history.push(`/${link}/${ +this.props.match.params.page - 1}`)
+                this.props.history.push(`/${link}/${page - 1}`)
+                this.fetchData(page - 1)
                 break
 
             default:
                 this.props.history.push(`/${link}/${name}`)
+                this.fetchData(name)
                 break
         }
     }
@@ -73,6 +84,7 @@ class ExploreContainer extends React.Component {
 
 
     render() {
+        console.log('render ExploreContainer')
         const data = this.props.data ? this.props.data.map((item) => {
                 item.imageLink = getImageLink(this.props.configApi, item.poster_path, 'poster', 'w185');
                 return item
@@ -81,7 +93,7 @@ class ExploreContainer extends React.Component {
         return <ExploreContent
             data={data}
             handlePagination={this.handleClick}
-            page={this.props.match.params.page}
+            page={this.props.page}
             totalPages={this.props.totalPages}
             isLoading={this.props.isLoading}
             errorMessage={this.props.errorMessage}

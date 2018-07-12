@@ -59,7 +59,7 @@ export function filmDataReducer(state, action) {
 
 export function multiDataReducer(state, action) {
     if (!state) state = {
-        isLoading: true,
+        isLoading: false,
         errorMessage: '',
         data: {}
     }
@@ -68,19 +68,21 @@ export function multiDataReducer(state, action) {
         case MULTI_DATA_FETCH:
             return {
                 ...state,
-                data: action.data
+                data: action.data,
+                isLoading: false
             };
 
         case MULTI_DATA_IS_LOADING:
             return {
                 ...state,
-                isLoading: action.isLoading
+                isLoading: true
             };
 
         case MULTI_DATA_ERROR:
             return {
                 ...state,
-                errorMessage: action.errorMessage
+                errorMessage: action.errorMessage,
+                isLoading: false
             };
 
         default:

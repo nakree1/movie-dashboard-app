@@ -1,7 +1,8 @@
 import React from 'react'
+import Loader from './Loader'
 // import debounce from 'lodash-es/debounce'
 
-export default class FilmCard extends React.Component {
+export default class Pagination extends React.Component {
 
     // emitClick = debounce((name) => {
     //     this.props.handler(name)
@@ -74,10 +75,30 @@ export default class FilmCard extends React.Component {
     render() {
         // console.log('pagination')
         // console.log(this.props)
-        const {page, totalPages} = this.props
-
+        let {page, totalPages, isLoading} = this.props
+        page = +page
         const prevArrows = ['<<', '<']
         const nextArrows = ['>', '>>']
+
+
+        if (isLoading) {
+            console.log('Pag loading')
+            // return <Loader isSmall={true} />
+            const emptyButtons = Array(5).fill('-')
+            const pagination = [...prevArrows, ...emptyButtons, ...nextArrows]
+            const newButtons = pagination.map((item, index) => {
+                return <button key={index} className={`btn btn-outline-secondary`}>{item}</button>
+            })
+
+            return (
+                <div className="btn-group btn-group ">
+                    {newButtons}
+                </div>
+            )
+
+        }
+
+
         const pages = this.getPagination(page, totalPages)
         const pagination = [...prevArrows, ...pages, ...nextArrows]
 
