@@ -8,6 +8,7 @@ import CreditsContainer from '../containers/CreditsContainer'
 import ReviewsContainer from '../containers/ReviewsContainer'
 import Loader from './Loader'
 import FormatDate from './FormatDate'
+import {GreenButton, RedButton} from '../styled/Buttons'
 
 
 class FilmContent extends React.Component {
@@ -58,6 +59,8 @@ class FilmContent extends React.Component {
                             <div className="flex-column d-flex">
                                 {saveButton}
                                 <button className="btn btn-success btn-lg w-25 py-2" onClick={this.props.routeBack}>Back</button>
+                                <GreenButton size={'lg'} onClick={this.props.routeBack}>Test Button</GreenButton>
+                                <RedButton size={'lg'} onClick={this.props.routeBack}>Test Button</RedButton>
                             </div>
                         </div>
                     </div>
