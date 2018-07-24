@@ -1,21 +1,30 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
+import SmallFilmCard from './SmallFilmCard'
+import styled from 'styled-components'
+
+const FlexContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`
 
 class ExtraDataFilmContent extends React.Component {
     render() {
+        const data = this.props.data
         console.log('RecommendFilmsContent data 1 is:')
-        console.log(this.props.data)
-        const data = typeof(this.props.data.results) !== 'undefined' ? this.props.data.results : null
-        const list = data ? data.map((item) => {
-            return <Link to={`/film/${item.id}`} key={item.id} className="btn btn-outline-info m-1">{item.title}</Link>
-        }) : null
-
-        console.log('RecommendFilmsContent data 2 is:')
         console.log(data)
+        const list = Object.keys(data).length !== 0 ? data.map((item) => {
+            return (
+                <SmallFilmCard {...item} />
+
+                )
+        }): null
+
         return (
             <div>
                 <p className="h5 mt-2">{this.props.title}</p>
-                <div className="">{list}</div>
+                <FlexContainer>{list}</FlexContainer>
             </div>
         )
     }

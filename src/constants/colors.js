@@ -1,6 +1,8 @@
 export const gray = '#6c757d'
 export const lightgray = '#f8f9fa'
 
+export const mainBackground = 'f2f2f2'
+
 //SidebarItems
 export const navLink = '#6e6e6e'
 export const navLinkCurrent = '#87deed'

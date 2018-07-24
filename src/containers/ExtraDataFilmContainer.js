@@ -1,6 +1,8 @@
 import React from 'react'
 import {fetchAnyData} from "../actions/fetchData"
 import ExtraDataFilmContent from '../components/ExtraDataFilmContent'
+import {connect} from 'react-redux'
+import getImageLink from '../actions/getImageLink'
 
 class ExtraDataFilmContainer extends React.Component {
     constructor(props){
@@ -11,7 +13,19 @@ class ExtraDataFilmContainer extends React.Component {
     }
 
     componentDidMount() {
-        fetchAnyData(this.props.link).then((value) => this.setState({data: value}))
+        fetchAnyData(this.props.link)
+            // .then((value) => {console.log(value)})
+            .then(
+                (value) => value.results.map((item) => {
+                    item.imageLink = getImageLink(this.props.configApi, item.poster_path, 'poster', 'w185');
+                    return item
+                })
+            )
+            .then(
+                (value) => this.setState({
+                    data: value
+                })
+            )
     }
 
     render() {
@@ -19,4 +33,10 @@ class ExtraDataFilmContainer extends React.Component {
     }
 }
 
-export default ExtraDataFilmContainer
+const mapStateToProps = (state) => {
+    return {
+        configApi: state.configApi
+    }
+}
+
+export default connect(mapStateToProps)(ExtraDataFilmContainer)

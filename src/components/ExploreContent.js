@@ -2,6 +2,14 @@ import React from 'react'
 import Pagination from './Pagination'
 import FilmCard from "./FilmCard";
 import Loader from "./Loader";
+import styled from 'styled-components'
+
+const GridContainer = styled.div`
+  display: grid;
+  grid-gap: 30px;
+  justify-content: space-between;
+  grid-template-columns: repeat(auto-fit, 185px);
+`
 
 
 export default class ExploreContent extends React.Component {
@@ -23,7 +31,7 @@ export default class ExploreContent extends React.Component {
                     />
                 </div>
                 <div className="row">
-                    <div className="col d-flex flex-wrap">
+                    <div className="col mx-auto">
                         <Loader />
                     </div>
                 </div>
@@ -57,11 +65,9 @@ export default class ExploreContent extends React.Component {
                             isLoading={this.props.isLoading}
                         />
                     </div>
-                    <div className="row">
-                        <div className="col d-flex flex-wrap">
+                    <GridContainer>
                             {list}
-                        </div>
-                    </div>
+                    </GridContainer>
                 </div>
             )
     }

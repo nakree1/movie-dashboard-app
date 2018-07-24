@@ -15,8 +15,10 @@ const StyledLink = styled(Link)`
 `
 
 const Card = styled.div`
+  width: 100px;
+  margin-right: 15px;
   position: relative;
-  height: ${props => props.size === 'default' ? '325px' : '200px'};
+  height: 200px;
   border-radius: 4px;
   background-color: white;
   cursor: pointer;
@@ -40,13 +42,13 @@ const Card = styled.div`
 `
 
 const CardImage = styled.div`
-  height: 80%;
+  height: 70%;
 `
 
 const CardBody = styled.p`
   text-align: center;
   padding: 5px 10px;
-  font-size: 1rem;
+  font-size: 0.9rem;
   color: ${navLink};
   //font-weight: 400;
 `
@@ -70,7 +72,7 @@ export default class FilmCard extends React.Component {
             <StyledLink to={`/film/${id}`} >
                 <Card size={size}>
                     {/*<CardBadge position={'10px'}>*/}
-                        {/*Year: <FormatDate date={release_date} onlyYear={true}/>*/}
+                    {/*Year: <FormatDate date={release_date} onlyYear={true}/>*/}
                     {/*</CardBadge>*/}
 
                     <CardBadge position={'20px'}>
