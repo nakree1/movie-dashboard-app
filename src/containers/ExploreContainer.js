@@ -21,7 +21,7 @@ class ExploreContainer extends React.Component {
     }
 
     componentDidMount() {
-        console.log('ComponentDidMount')
+        // console.log('ComponentDidMount')
         this.props.fetchData((this.props.match.params.page ? this.props.match.params.page : "1"), {
             validateStatus: (status) => {
                 return status === 200;
@@ -37,7 +37,7 @@ class ExploreContainer extends React.Component {
     }
 
     componentWillUnmount() {
-        console.log('--unmount TopContainer')
+        // console.log('--unmount TopContainer')
     }
 
     handleClick = (name) => {
@@ -84,7 +84,7 @@ class ExploreContainer extends React.Component {
 
 
     render() {
-        console.log('render ExploreContainer')
+        // console.log('render ExploreContainer')
         const data = this.props.data ? this.props.data.map((item) => {
                 item.imageLink = getImageLink(this.props.configApi, item.poster_path, 'poster', 'w185');
                 return item

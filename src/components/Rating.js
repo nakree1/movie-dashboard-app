@@ -31,6 +31,10 @@ export default class Rating extends React.Component {
         if (rate < 5) color = '#dc3545'
         if (rate === '-') color = '#6c757d'
 
+        if (this.props.badge && this.props.onlyNumber) {
+            return <BadgeRating color={color}>{rate}</BadgeRating>
+        }
+
         if (this.props.badge) {
             return <BadgeRating color={color}>Rating: {rate}</BadgeRating>
         }

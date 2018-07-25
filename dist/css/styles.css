@@ -1,3 +1,9 @@
+.my-modal {
+  position: absolute;
+  background-color: whitesmoke;
+  width: 100%;
+  padding: 1rem;
+  font-size: 1rem; }
 html {
   font-size: 16px;
   margin: 0;
@@ -5,12 +11,6 @@ html {
 
 body {
   background-color: blueviolet; }
-.my-modal {
-  position: absolute;
-  background-color: whitesmoke;
-  width: 100%;
-  padding: 1rem;
-  font-size: 1rem; }
 .form-control-dark {
   color: #fff !important;
   background-color: rgba(255, 255, 255, 0.1) !important;

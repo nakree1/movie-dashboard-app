@@ -1,7 +1,6 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 import Rating from "./Rating";
-import FormatDate from "./FormatDate";
 import styled from 'styled-components'
 import {navBackActive, navLink} from '../constants/colors'
 
@@ -15,8 +14,8 @@ const StyledLink = styled(Link)`
 `
 
 const Card = styled.div`
-  width: 100px;
-  margin-right: 15px;
+  width: ${props => props.width || '120px'};
+  margin-right: ${props => props.margin || '15px'};
   position: relative;
   height: 200px;
   border-radius: 4px;
@@ -24,6 +23,10 @@ const Card = styled.div`
   cursor: pointer;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   transition: transform 0.1s;
+  
+  //&:nth-last-child(1) {
+  //  margin-right: 0;
+  //}
 
   &:hover {
     box-shadow: 0 4px 12px 0 rgba(0,0,0,0.4);
@@ -42,13 +45,14 @@ const Card = styled.div`
 `
 
 const CardImage = styled.div`
-  height: 70%;
+  height: 80%;
 `
 
 const CardBody = styled.p`
+  margin: 0;
   text-align: center;
-  padding: 5px 10px;
-  font-size: 0.9rem;
+  padding: 2px 5px;
+  font-size: 0.8rem;
   color: ${navLink};
   //font-weight: 400;
 `
@@ -65,18 +69,14 @@ const CardBadge = styled.div`
   top: ${props => props.position || '20px'};
 `
 
-export default class FilmCard extends React.Component {
+export default class SmallFilmCard extends React.Component {
     render() {
-        const {id, imageLink, title, vote_average, release_date, size = 'default'} = this.props;
+        const {id, imageLink, title, vote_average, release_date, width, margin} = this.props;
         return (
             <StyledLink to={`/film/${id}`} >
-                <Card size={size}>
-                    {/*<CardBadge position={'10px'}>*/}
-                    {/*Year: <FormatDate date={release_date} onlyYear={true}/>*/}
-                    {/*</CardBadge>*/}
-
-                    <CardBadge position={'20px'}>
-                        <Rating badge={true} rate={vote_average}/>
+                <Card width={width} margin={margin}>
+                    <CardBadge position={'10px'}>
+                        <Rating badge={true} onlyNumber={true} rate={vote_average}/>
                     </CardBadge>
 
                     <CardImage>
@@ -85,7 +85,6 @@ export default class FilmCard extends React.Component {
 
                     <CardBody>
                         {title}
-                        {/*<Rating rate={vote_average}/>*/}
                     </CardBody>
 
                 </Card>
