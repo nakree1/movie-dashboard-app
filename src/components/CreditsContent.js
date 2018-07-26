@@ -1,5 +1,6 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
+import {Row} from '../styled/Layout'
 
 export default class CreditsContent extends React.Component {
     getTable = (data, ...cols) => {
@@ -38,7 +39,7 @@ export default class CreditsContent extends React.Component {
             return (
                 <tr key={item.id} className="bg-light mt-2">
                     <th scope="row">{index + 1}</th>
-                    <td>{item.department}</td>
+                    {/*<td>{item.department}</td>*/}
                     <td>{item.job}</td>
                     <td>{item.name}</td>
                 </tr>
@@ -47,19 +48,19 @@ export default class CreditsContent extends React.Component {
 
         if (cast === 0 || crew === 0) return <div className="col">Empty</div>
         return (
-            <div className="col">
+            <Row round mb="30px" p="15px">
                 <p className="h5 mt-2">
                     {this.props.title}
                 </p>
                 {this.getTable(cast, '#', 'Character', 'Name')}
-                {this.getTable(crew, '#', 'Department', 'Job', 'Name')}
+                {this.getTable(crew, '#', 'Job', 'Name')}
                 <Link to={{
                     pathname: `/film/${this.props.movieId}/credits`,
                     state: { data: this.props.data }
                 }}
                       className="btn btn-success btn-block mb-5"
                 >Expand Credits</Link>
-            </div>
+            </Row>
         )
     }
 }

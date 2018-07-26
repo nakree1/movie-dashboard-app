@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import {Link} from 'react-router-dom'
 
 const Button = styled.button.attrs({
     type: 'button',
@@ -36,4 +37,16 @@ export const GreenButton = Button.extend`
 `
 export const RedButton = Button.extend`
     background-color: red;
+`
+
+export const StyledLink = styled(Link)`
+  color: inherit;
+  
+  max-width: ${props => props.w ? props.w : 'inherit'};
+  display: ${props => props.b || props.w ? 'block' : 'inline'};
+
+  &:hover {
+    text-decoration: none;
+    color: inherit;
+  }
 `

@@ -3,16 +3,8 @@ import {Link} from 'react-router-dom'
 import Rating from "./Rating";
 import FormatDate from "./FormatDate";
 import styled from 'styled-components'
+import {StyledLink} from "../styled/Buttons"
 import {navBackActive, navLink} from '../constants/colors'
-
-const StyledLink = styled(Link)`
-  color: inherit;
-
-  &:hover {
-    text-decoration: none;
-    color: inherit;
-  }
-`
 
 const Card = styled.div`
   position: relative;

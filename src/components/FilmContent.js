@@ -8,11 +8,13 @@ import CreditsContainer from '../containers/CreditsContainer'
 import ReviewsContainer from '../containers/ReviewsContainer'
 import Loader from './Loader'
 import FormatDate from './FormatDate'
+import styled from 'styled-components'
+import {Row, Col, FluidImage} from '../styled/Layout'
 import {GreenButton, RedButton} from '../styled/Buttons'
 
 
-class FilmContent extends React.Component {
 
+class FilmContent extends React.Component {
     render() {
         const {data, isLoading, errorMessage, prevUrl = 1, history, isFilmSaved} = this.props
         let saveButton
@@ -39,19 +41,18 @@ class FilmContent extends React.Component {
 
         return (
                 <div className="container-fluid my-4">
-                    <div className="row">
-                        <div className="col-4">
-                            <img
+                    <Row round mb="30px">
+                        <Col w="30%" m="10px" loading>
+                            <FluidImage
                                 src={data.imageLink}
-                                className="img-fluid"
                             />
-                        </div>
-                        <div className="col">
+                        </Col>
+                        <Col p="10px">
                             <h1>{data.title}</h1>
                             <h4>{data.tagline}</h4>
                             <FormatDate className="text-muted" date={data.release_date} />
                             <Money budget={data.budget} revenue={data.revenue} />
-                            <span>Rating:<Rating rate={data.vote_average}/></span>
+                            <Rating rate={data.vote_average}/>
                             <GenresContainer genres={data.genres} history={history}/>
 
                             <p>{data.overview}</p>
@@ -62,29 +63,16 @@ class FilmContent extends React.Component {
                                 {/*<GreenButton size={'lg'} onClick={this.props.routeBack}>Test Button</GreenButton>*/}
                                 {/*<RedButton size={'lg'} onClick={this.props.routeBack}>Test Button</RedButton>*/}
                             </div>
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="col">
-                            <ExtraDataFilmContainer link={`movie/${data.id}/recommendations`} title='Recommended Films:'/>
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="col">
-                            <ExtraDataFilmContainer link={`movie/${data.id}/similar`} title='Similar Films:'/>
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="col">
-                            <CreditsContainer link={`movie/${data.id}/credits`} title='Credits:' movieId={data.id}/>
-                        </div>
-                    </div>
+                        </Col>
+                    </Row>
 
-                    <div className="row">
-                        <div className="col">
-                            <ReviewsContainer link={`movie/${data.id}/reviews`} title='Reviews:'/>
-                        </div>
-                    </div>
+                    <ExtraDataFilmContainer link={`movie/${data.id}/recommendations`} title='Recommended Films:'/>
+
+                    <ExtraDataFilmContainer link={`movie/${data.id}/similar`} title='Similar Films:'/>
+
+                    <CreditsContainer link={`movie/${data.id}/credits`} title='Credits:' movieId={data.id}/>
+
+                    <ReviewsContainer link={`movie/${data.id}/reviews`} title='Reviews:'/>
                 </div>
             )
     }

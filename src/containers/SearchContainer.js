@@ -22,6 +22,7 @@ class SearchContainer extends React.Component {
 
     render() {
         const query = this.props.query
+        const configApi = this.props.configApi
         console.log('searchContainerQuery:')
         console.log(query)
 
@@ -40,8 +41,8 @@ class SearchContainer extends React.Component {
             template = (
                 <div>
                     <h1>Searching "{query.request}"</h1>
-                    <SearchItemsList data={movie} header="Movie List" type="movie"/>
-                    <SearchItemsList data={person} header="Person List" type="person"/>
+                    <SearchItemsList configApi={configApi} data={movie} header="Movie List" type="movie"/>
+                    <SearchItemsList configApi={configApi} data={person} header="Person List" type="person"/>
                     <p className="text-muted mt-5">Total results: {this.props.data.total_results}</p>
                 </div>
             )
@@ -55,7 +56,7 @@ class SearchContainer extends React.Component {
             template = (
                 <div>
                     <h1>Searching "{query.request}"</h1>
-                    <SearchItemsList data={results} header="Movie List" type="movie"/>
+                    <SearchItemsList configApi={configApi} data={results} header="Movie List" type="movie"/>
                     <p className="text-muted mt-5">Total results:{total_pages}</p>
                 </div>
             )
@@ -72,7 +73,8 @@ class SearchContainer extends React.Component {
 const mapStateToProps = (state) => {
     return {
         query: state.search.request,
-        data: state.search.data
+        data: state.search.data,
+        configApi: state.configApi,
     }
 };
 

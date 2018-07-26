@@ -30,9 +30,11 @@ export default class Money extends React.Component {
         // if (rate === '-.-') style = 'text-secondary'
 
         return <div className="">
-            <div className="text-danger my-0 py-0 mr-2 d-inline">Budget: {budget}</div>
-            <div className="text-success my-0 py-0 mr-2 d-inline">Revenue: {revenue}</div>
-            <div className="text-primary my-0 py-0 mr-2 d-inline">Profit: {profit}</div>
+            <div className="text-danger my-0 py-0 mr-2 d-inline font-weight-bold">Budget: {budget}</div>
+            <br/>
+            <div className="text-success my-0 py-0 mr-2 d-inline font-weight-bold">Revenue: {revenue}</div>
+            <br/>
+            <div className="text-primary my-0 py-0 mr-2 d-inline font-weight-bold">Profit: {profit}</div>
         </div>
     }
 }

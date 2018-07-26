@@ -39,6 +39,10 @@ export default class Rating extends React.Component {
             return <BadgeRating color={color}>Rating: {rate}</BadgeRating>
         }
 
-        return <TextRating color={color}>{rate}</TextRating>
+        if (this.props.onlyNumber) {
+            return <TextRating color={color}>{rate}</TextRating>
+        }
+
+        return <TextRating color={color}>Rating: {rate}</TextRating>
     }
 }

@@ -1,11 +1,13 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 import SmallFilmCard from './SmallFilmCard'
+import {Row} from '../styled/Layout'
 import styled from 'styled-components'
 
 const SliderContainer = styled.div`
   display: block;
   width: 100%;
+  //overflow-x: scroll;
   overflow-x: auto;
   overflow-y: hidden;
   padding: 1rem 0;
@@ -82,9 +84,9 @@ class ExtraDataFilmContent extends React.Component {
     }
 
     componentDidMount() {
-        this.setState({
-            containerWidth: this.container.clientWidth
-        })
+        // this.setState({
+        //     containerWidth: this.container.clientWidth
+        // })
     }
 
     render() {
@@ -93,6 +95,8 @@ class ExtraDataFilmContent extends React.Component {
         console.log('containerShift--------------')
         console.log(this.state.containerShift)
         const data = this.props.data
+
+        if (Object.keys(data).length === 0) return null
         // console.log('RecommendFilmsContent data 1 is:')
         // console.log(data)
         const list = Object.keys(data).length !== 0 ? data.map((item) => {
@@ -103,7 +107,7 @@ class ExtraDataFilmContent extends React.Component {
         }): null
 
         return (
-            <div>
+            <Row round mb="30px" p="15px">
                 <p className="h5 mt-2">{this.props.title}</p>
                 <SliderContainer >
                     {/*<ScrollButton navType={'prev'} onClick={this.handleNav}> &lt; </ScrollButton>*/}
@@ -115,7 +119,7 @@ class ExtraDataFilmContent extends React.Component {
                     </FlexContainer>
                     {/*<ScrollButton navType="next" onClick={this.handleNav}> &gt; </ScrollButton>*/}
                 </SliderContainer>
-            </div>
+            </Row>
         )
     }
 }

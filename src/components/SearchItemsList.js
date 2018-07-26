@@ -1,12 +1,21 @@
 import React from 'react'
+import ListElement from './ListElement'
+import getImageLink from '../actions/getImageLink'
 
 class SearchItemsList extends React.Component {
 
     render() {
         const items = this.props.data || null
 
+        // const itemsList = items ? items.map((item) => {
+        //     return <li key={item.id}>
+        //         <a href={`#/${item.title ? 'film' : 'person'}/${item.id}`} data-id={item.id}>{item.title || item.name}</a>
+        //     </li>
+        // }) : null
+
         const itemsList = items ? items.map((item) => {
-            return <li key={item.id}><a href={`#/${item.title ? 'film' : 'person'}/${item.id}`} data-id={item.id}>{item.title || item.name}</a></li>
+            const imageLink = getImageLink(this.props.configApi, item.poster_path, 'poster', 'w342')
+            return <ul><ListElement imageLink={imageLink} {...item} /></ul>
         }) : null
 
         const content = (itemsList === null || itemsList.length === 0)

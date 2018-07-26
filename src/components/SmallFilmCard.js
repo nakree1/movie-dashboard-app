@@ -11,11 +11,17 @@ const StyledLink = styled(Link)`
     text-decoration: none;
     color: inherit;
   }
+  
+  //&:last-child div {
+  //  margin-right: 0;
+  //}
 `
 
 const Card = styled.div`
   width: ${props => props.width || '120px'};
   margin-right: ${props => props.margin || '15px'};
+  margin-left: ${props => props.margin || '15px'};
+  margin-bottom: 10px;
   position: relative;
   height: 200px;
   border-radius: 4px;
@@ -24,9 +30,6 @@ const Card = styled.div`
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   transition: transform 0.1s;
   
-  //&:nth-last-child(1) {
-  //  margin-right: 0;
-  //}
 
   &:hover {
     box-shadow: 0 4px 12px 0 rgba(0,0,0,0.4);

@@ -30,7 +30,7 @@ class PersonContainer extends React.Component {
             ? null
             : {
                 ...this.state.data,
-                imageLink: setSafe(() => getImageLink(this.props.configApi, this.state.data.profile_path, 'poster', 'original'))
+                imageLink: setSafe(() => getImageLink(this.props.configApi, this.state.data.profile_path, 'poster', 'w342'))
             }
 
         console.log('PersonContainer:')

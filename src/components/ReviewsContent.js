@@ -1,5 +1,6 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
+import {Row} from '../styled/Layout'
 
 class ReviewsContent extends React.Component {
     constructor(props) {
@@ -40,7 +41,7 @@ class ReviewsContent extends React.Component {
         console.log('this.props REVIEWS CONTENT')
         console.log(this.props)
         return (
-            <div className="col">
+            <Row round mb="30px" p="15px">
                 <p className="h5 mt-2">{this.props.title}</p>
                 <div className="">{list}</div>
                 <Link to={{
@@ -49,7 +50,7 @@ class ReviewsContent extends React.Component {
                 }}
                       className="btn btn-primary btn-block mb-5"
                 >Expand Reviews</Link>
-            </div>
+            </Row>
         )
     }
 }
