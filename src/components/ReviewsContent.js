@@ -1,6 +1,7 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 import {Row} from '../styled/Layout'
+import {cropText} from "../actions/cropText"
 
 class ReviewsContent extends React.Component {
     constructor(props) {
@@ -27,12 +28,11 @@ class ReviewsContent extends React.Component {
         const list = data ? data.map((item) => {
             const author = item.author
             const originalText = item.content
-            let truncatedText = originalText
-            if (originalText.length > 200) truncatedText = originalText.slice(0, 200).trim().concat('...')
+            let truncatedText = cropText(originalText, 40)
             const text = this.state.expanded.includes(item.id) ? originalText : truncatedText
             return (
                 <div key={item.id} className=" my-2 p-2 btn-light" style={{cursor: `pointer`}} onClick={() => {this.toggleText(item.id)}}>
-                    <p className="h2 text-center">{author}</p>
+                    <p className="h2">{author}:</p>
                     <p className="py-2 px-4">{text}</p>
                 </div>
                 )

@@ -6,6 +6,7 @@ class SearchItemsList extends React.Component {
 
     render() {
         const items = this.props.data || null
+        const mediaType = this.props.type
 
         // const itemsList = items ? items.map((item) => {
         //     return <li key={item.id}>
@@ -14,8 +15,8 @@ class SearchItemsList extends React.Component {
         // }) : null
 
         const itemsList = items ? items.map((item) => {
-            const imageLink = getImageLink(this.props.configApi, item.poster_path, 'poster', 'w342')
-            return <ul><ListElement imageLink={imageLink} {...item} /></ul>
+            const imageLink = getImageLink(this.props.configApi, item.poster_path || item.profile_path, 'poster', 'w342')
+            return <ul key={item.id}><ListElement imageLink={imageLink} type={mediaType} {...item} /></ul>
         }) : null
 
         const content = (itemsList === null || itemsList.length === 0)

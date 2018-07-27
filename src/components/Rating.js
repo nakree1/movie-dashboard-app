@@ -1,9 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const BadgeRating = styled.span.attrs({
-    color: props => props.color || null
-})`
+const BadgeRating = styled.span`
   background-color: ${props => props.color};
   color: white;
   border-radius: 0 4px 4px 0;
@@ -13,6 +11,14 @@ const TextRating = styled.span.attrs({
     color: props => props.color || null
 })`
   color: ${props => props.color}
+`
+
+const BackgroundRating = styled.div`
+  display: block;
+  background-color: ${props => props.color};
+  color: white;
+  padding: 4px 6px;
+  border-radius: 4px;
 `
 
 export default class Rating extends React.Component {
@@ -37,6 +43,10 @@ export default class Rating extends React.Component {
 
         if (this.props.badge) {
             return <BadgeRating color={color}>Rating: {rate}</BadgeRating>
+        }
+
+        if (this.props.background) {
+            return <BackgroundRating color={color}>Rating: {rate}</BackgroundRating>
         }
 
         if (this.props.onlyNumber) {
