@@ -29,12 +29,30 @@ export default class Money extends React.Component {
         // if (rate < 5) style = 'text-danger'
         // if (rate === '-.-') style = 'text-secondary'
 
-        return <div className="">
-            <div className="text-danger my-0 py-0 mr-2 d-inline font-weight-bold">Budget: {budget}</div>
-            <br/>
-            <div className="text-success my-0 py-0 mr-2 d-inline font-weight-bold">Revenue: {revenue}</div>
-            <br/>
-            <div className="text-primary my-0 py-0 mr-2 d-inline font-weight-bold">Profit: {profit}</div>
-        </div>
+        return (
+            <div>
+                <div>Budget: {budget}</div>
+                <div>Revenue: {revenue}</div>
+                <div>Profit: {profit}</div>
+            </div>
+        )
+
     }
 }
+
+{/*<table className="table table-borderless">*/}
+    {/*<tbody>*/}
+    {/*<tr>*/}
+        {/*<td>Budget:</td>*/}
+        {/*<td>{budget}</td>*/}
+    {/*</tr>*/}
+    {/*<tr>*/}
+        {/*<td>Revenue:</td>*/}
+        {/*<td>{revenue}</td>*/}
+    {/*</tr>*/}
+    {/*<tr>*/}
+        {/*<td>Profit:</td>*/}
+        {/*<td>{profit}</td>*/}
+    {/*</tr>*/}
+    {/*</tbody>*/}
+{/*</table>*/}

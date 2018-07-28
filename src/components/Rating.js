@@ -21,6 +21,16 @@ const BackgroundRating = styled.div`
   border-radius: 4px;
 `
 
+const BasicBadge = styled.div`
+  font-size: 2rem;
+  font-weight: bold;
+  padding: 2px 12px;
+  line-height: inherit;
+  border-radius: 4px;
+  background-color: ${props => props.color};
+  color: white;
+`
+
 export default class Rating extends React.Component {
     render() {
         let rate = parseFloat(this.props.rate) || null
@@ -45,13 +55,14 @@ export default class Rating extends React.Component {
             return <BadgeRating color={color}>Rating: {rate}</BadgeRating>
         }
 
-        if (this.props.background) {
-            return <BackgroundRating color={color}>Rating: {rate}</BackgroundRating>
+        if (this.props.basicBadge) {
+            return <BasicBadge color={color}>{rate}</BasicBadge>
         }
 
         if (this.props.onlyNumber) {
             return <TextRating color={color}>{rate}</TextRating>
         }
+
 
         return <TextRating color={color}>Rating: {rate}</TextRating>
     }

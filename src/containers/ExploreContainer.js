@@ -50,30 +50,38 @@ class ExploreContainer extends React.Component {
 
         switch (name) {
             case 'first':
+                if (page <= 1) return
                 this.props.history.push(`/${link}/1`)
                 this.fetchData('1')
+
+                window.scrollTo(0, 0)
                 break
 
             case 'last':
+                if (page >= totalPages) return
                 this.props.history.push(`/${link}/${totalPages}`)
                 this.fetchData(totalPages)
+                window.scrollTo(0, 0)
                 break
 
             case 'next':
                 if (page >= totalPages) return
                 this.props.history.push(`/${link}/${page + 1}`)
                 this.fetchData(page + 1)
+                window.scrollTo(0, 0)
                 break
 
             case 'prev':
                 if (page <= 1) return
                 this.props.history.push(`/${link}/${page - 1}`)
                 this.fetchData(page - 1)
+                window.scrollTo(0, 0)
                 break
 
             default:
                 this.props.history.push(`/${link}/${name}`)
                 this.fetchData(name)
+                window.scrollTo(0, 0)
                 break
         }
     }

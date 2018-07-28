@@ -12,7 +12,32 @@ import styled from 'styled-components'
 import {Row, Col, FluidImage} from '../styled/Layout'
 import {GreenButton, RedButton} from '../styled/Buttons'
 
+const BasicBadge = styled.div`
+  //float: right;
+  font-size: 2rem;
+  font-weight: bold;
+  padding: 2px 12px;
+  line-height: inherit;
+  //width: 100px;
+  border-radius: 4px;
+  background-color: #e95463;
+  color: white;
+`
+const MyHeader = styled.h1`
+  display: flex;
+  justify-content: space-between;
+`
 
+const HeaderWrapper = styled.div`
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+`
+
+const DownSection = styled.div`
+
+  height: auto;
+`
 
 class FilmContent extends React.Component {
     render() {
@@ -48,21 +73,32 @@ class FilmContent extends React.Component {
                             />
                         </Col>
                         <Col p="10px">
-                            <h1>{data.title}</h1>
-                            <h4>{data.tagline}</h4>
-                            <FormatDate className="text-muted" date={data.release_date} />
-                            <Money budget={data.budget} revenue={data.revenue} />
-                            <Rating rate={data.vote_average}/>
-                            <GenresContainer genres={data.genres} history={history}/>
+                            <div>
+                                <HeaderWrapper>
+                                    <h1>{data.title}</h1>
+                                    <Rating basicBadge={true} rate={data.vote_average} />
+                                </HeaderWrapper>
 
-                            <p>{data.overview}</p>
-                            <p>Film ID: {data.id}</p>
-                            <div className="flex-column d-flex">
-                                {saveButton}
-                                <button className="btn btn-success btn-lg w-25 py-2" onClick={this.props.routeBack}>Back</button>
-                                {/*<GreenButton size={'lg'} onClick={this.props.routeBack}>Test Button</GreenButton>*/}
-                                {/*<RedButton size={'lg'} onClick={this.props.routeBack}>Test Button</RedButton>*/}
+                                <h4>{data.tagline}</h4>
+
+
+                                <GenresContainer genres={data.genres} history={history}/>
+                                <FormatDate className="text-muted" date={data.release_date} />
+                                <p>{data.overview}</p>
+
+
+
+                                {/*<Money budget={data.budget} revenue={data.revenue} />*/}
+
                             </div>
+                            <DownSection>
+                                <div className="flex-column d-flex">
+                                    {saveButton}
+                                    <button className="btn btn-success btn-lg w-25 py-2" onClick={this.props.routeBack}>Back</button>
+                                    {/*<GreenButton size={'lg'} onClick={this.props.routeBack}>Test Button</GreenButton>*/}
+                                    {/*<RedButton size={'lg'} onClick={this.props.routeBack}>Test Button</RedButton>*/}
+                                </div>
+                            </DownSection>
                         </Col>
                     </Row>
 

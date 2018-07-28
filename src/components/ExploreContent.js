@@ -19,10 +19,7 @@ export default class ExploreContent extends React.Component {
         if (errorMessage.length !== 0) return <div className="alert alert-danger">Error: {errorMessage}</div>
         if (isLoading) return (
             <div className="container-fluid">
-                <div className="row justify-content-center">
-                    <div className="alert alert-info">Page: {this.props.page} Total: {this.props.totalPages}</div>
-                </div>
-                <div className="row d-flex justify-content-center mb-5">
+                <div className="row d-flex justify-content-center my-5">
                     <Pagination
                         handler={this.props.handlePagination}
                         page={this.props.page}
@@ -54,10 +51,11 @@ export default class ExploreContent extends React.Component {
 
         return (
                 <div className="container-fluid">
-                    <div className="row justify-content-center">
-                        <div className="alert alert-info">Page: {this.props.page} Total: {this.props.totalPages}</div>
-                    </div>
-                    <div className="row d-flex justify-content-center mb-5">
+                    {/*<div className="row justify-content-center">*/}
+                        {/*<div className="alert alert-info">Page: {this.props.page} Total: {this.props.totalPages}</div>*/}
+                    {/*</div>*/}
+
+                    <div className="row d-flex justify-content-center my-5">
                         <Pagination
                             handler={this.props.handlePagination}
                             page={this.props.page}
@@ -65,9 +63,19 @@ export default class ExploreContent extends React.Component {
                             isLoading={this.props.isLoading}
                         />
                     </div>
+
                     <GridContainer>
                             {list}
                     </GridContainer>
+
+                    <div className="row d-flex justify-content-center my-5">
+                        <Pagination
+                            handler={this.props.handlePagination}
+                            page={this.props.page}
+                            totalPages={this.props.totalPages}
+                            isLoading={this.props.isLoading}
+                        />
+                    </div>
                 </div>
             )
     }

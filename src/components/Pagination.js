@@ -1,44 +1,58 @@
 import React from 'react'
+import styled from 'styled-components'
+import {navBackActive} from '../constants/colors'
 import Loader from './Loader'
 // import debounce from 'lodash-es/debounce'
 
+const PagButton = styled.button`
+  cursor: pointer;
+  vertical-align: middle;
+  user-select: none;
+  border: none;
+  background-color: ${props => props.disabled ? '#9b9b9b' : '#e1e1e1'};
+  color: ${props => props.disabled ? 'white' : 'black'};
+  min-width: 40px;
+  padding: 10px 0;
+  
+  &:active {
+    
+  }
+  
+  &:hover {
+    background-color: #bcbcbc;
+  }
+  
+  &:focus {
+    //outline: 6px solid #22A1B5;
+    ////background-color: #a8a8a8;
+    //z-index: 200;
+  }
+  
+  &:first-child {
+    border-radius: 8px 0 0 8px;
+  }
+  
+  &:last-child {
+    border-radius: 0 8px 8px 0;
+  }
+`
+
+const PagCurrentButton = styled(PagButton)`
+  background-color: #03bfcb;
+  
+  &:hover {
+    background-color: #038f9b;
+  }
+`
+
+
 export default class Pagination extends React.Component {
-
-    // emitClick = debounce((name) => {
-    //     this.props.handler(name)
-    // }, 200)
-    //
-    // handleClick = (name) => {
-    //     this.emitClick(name)
-    // }
-
     getPagination = (current, max, range = 5) => {
         let c = current
         let m = max
         let r = range
         let delta = r % 3
         let arr = []
-
-        // if (max <= range) {
-        //     for (let i = 1; i <= max; i++) {
-        //         arr.push(i)
-        //     }
-        //     return arr
-        // }
-
-        // if (current + range >= max) {
-        //     for (let i = max; i <= max - range; i--) {
-        //         arr.push(i)
-        //     }
-        //     return arr
-        // }
-
-        // console.log('Current:')
-        // console.log(c)
-        // console.log('Max:')
-        // console.log(m)
-        // console.log('Delta:')
-        // console.log(delta)
 
         let right = c + delta > m ? m : c + delta
         let left = c - delta <= 1 ? 1 : c - delta
@@ -47,63 +61,47 @@ export default class Pagination extends React.Component {
 
         let diffLeft = left - c
         let diffRight = right - c
-        // console.log('left right diff <--')
-        // console.log(diffLeft, diffRight)
 
         if (diffRight !== 2) left = left - diffRight
         if (diffLeft !== -2) right = right - diffLeft
 
-        // if (diffRight !== 2) left = left - diffRight
         if (diffLeft === 0) right = right + diffRight
         if (diffRight === 0) left = left + diffLeft
-
-        // console.log('left | right:')
-        // console.log(left, right)
-        // console.log('diff:')
-        // console.log(diff)
 
         for (let i = left; i <= right; i++) {
             arr.push(i)
         }
-        // console.log(temp1)
+
        return arr
-
-
     }
 
     // << < 6 8 9 10 11> >>
     render() {
-        // console.log('pagination')
-        // console.log(this.props)
+
         let {page, totalPages, isLoading} = this.props
         page = +page
         const prevArrows = ['<<', '<']
         const nextArrows = ['>', '>>']
 
-
         if (isLoading) {
-            console.log('Pag loading')
-            // return <Loader isSmall={true} />
             const emptyButtons = Array(5).fill('-')
             const pagination = [...prevArrows, ...emptyButtons, ...nextArrows]
             const newButtons = pagination.map((item, index) => {
-                return <button key={index} className={`btn btn-outline-secondary`}>{item}</button>
+                return <PagButton key={index} >{item}</PagButton>
             })
 
             return (
-                <div className="btn-group btn-group ">
+                <div>
                     {newButtons}
                 </div>
             )
 
         }
 
-
         const pages = this.getPagination(page, totalPages)
         const pagination = [...prevArrows, ...pages, ...nextArrows]
 
         // console.log(pagination)
-
         // console.log(this.getPagination(1, 12))
         // console.log(this.getPagination(2, 12))
         // console.log(this.getPagination(3, 12))
@@ -124,54 +122,39 @@ export default class Pagination extends React.Component {
 
         const handler = this.props.handler
         const newButtons = pagination.map((item) => {
-            let selected = (item === page) ? '' : '-outline'
-            // let disabled = (page === 1) ? true : false
             let name
+            let disabled = false
 
             switch (item) {
                 case '<<':
                     name = 'first'
+                    if (page <= 1) disabled = true
                     break
 
                 case '<':
                     name = 'prev'
+                    if (page <= 1) disabled = true
                     break
 
                 case '>':
                     name = 'next'
+                    if (page >= totalPages) disabled = true
                     break
 
                 case '>>':
                     name = 'last'
+                    if (page >= totalPages) disabled = true
                     break
 
                 default:
                     name = item
             }
 
-            return <button className={`btn btn${selected}-secondary`} key={name} onClick={() => {handler(name)}}>{item}</button>
+            if (item === page) return <PagCurrentButton key={name} onClick={() => {handler(name)}}>{item}</PagCurrentButton>
+
+            return <PagButton key={name} onClick={() => {handler(name)}} disabled={disabled}>{item}</PagButton>
         })
 
-
-        const buttonGroup = (
-            <div className="btn-group btn-group ">
-                {newButtons}
-            </div>
-        )
-        // const buttonGroup = (
-        //     <div className="btn-group btn-group ">
-        //         <button className="btn btn-outline-secondary" name="return" onClick={() => {handler('return')}}>
-        //             First Page
-        //         </button>
-        //         <button className="btn btn-outline-secondary" name="prev" onClick={() => {handler('prev')}}>
-        //             Prev
-        //         </button>
-        //         <button className="btn btn-outline-secondary" name="next" onClick={() => {handler('next')}}>
-        //             Next
-        //         </button>
-        //     </div>
-        // )
-
-        return buttonGroup
+        return <div>{newButtons}</div>
     }
 }

@@ -31,8 +31,8 @@ class ReviewsContent extends React.Component {
             let truncatedText = cropText(originalText, 40)
             const text = this.state.expanded.includes(item.id) ? originalText : truncatedText
             return (
-                <div key={item.id} className=" my-2 p-2 btn-light" style={{cursor: `pointer`}} onClick={() => {this.toggleText(item.id)}}>
-                    <p className="h2">{author}:</p>
+                <div key={item.id} className="my-2 p-2 btn-light" style={{cursor: `pointer`}} onClick={() => {this.toggleText(item.id)}}>
+                    <p className="h4">{author}:</p>
                     <p className="py-2 px-4">{text}</p>
                 </div>
                 )
