@@ -1,4 +1,4 @@
-# movie-dashboards
+# movie-dashboard
 ## Current version 0.9.2
 
 Work in progress...
